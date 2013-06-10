@@ -1,5 +1,5 @@
-CREATE DATABASE CopyPasteNinja
-USE CopyPasteNinja
+CREATE DATABASE CopyPasteNinja;
+USE CopyPasteNinja;
 CREATE TABLE Users(
         id INT NOT NULL PRIMARY KEY auto_increment,
         Name VARCHAR(20) NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE Users(
 
 CREATE TABLE HightScore(
         id INT NOT NULL PRIMARY KEY auto_increment,
-        PlayerName VAR CHAR(20) NOT NULL,
+        PlayerName VARCHAR(20) NOT NULL,
         HightScore INT NOT NULL,
         Date DATE NOT NULL
 );
