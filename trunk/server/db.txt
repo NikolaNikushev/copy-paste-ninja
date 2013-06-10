@@ -1,5 +1,5 @@
-CREATE DATABASE new6;
-USE new6;
+CREATE DATABASE CopyPasteNinja
+USE CopyPasteNinja
 CREATE TABLE Users(
         id INT NOT NULL PRIMARY KEY auto_increment,
         Name VARCHAR(20) NOT NULL,
