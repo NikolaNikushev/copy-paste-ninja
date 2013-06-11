@@ -8,7 +8,8 @@
             { type: "ground", name: "dirt", x: 1280 / 2, y: 15, width: 1280, height: 30, isStatic: true },
             { type: "ground", name: "dirt", x: 15, y: 600 / 2, width: 30, height: 600, isStatic: true },
             { type: "ground", name: "dirt", x: 1280 - 15, y: 600 / 2, width: 30, height: 600, isStatic: true },
-            { type: "ground", name: "wood", x: 300, y: 390, width: 200, height: 30, isStatic: true },
+            { type: "ground", name: "dirt", x: 300, y: 390, width: 200, height: 30, isStatic: true },
+            { type: "ground", name: "dirt", x: 700, y: 500, width: 200, height: 30, isStatic: true },
 
             // obstacles
             { type: "block", name: "box", x: 320, y: 375, width: 50, height: 50 },

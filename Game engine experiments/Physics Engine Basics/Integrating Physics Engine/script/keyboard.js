@@ -10,40 +10,56 @@
     },
 
     keyDownHandler: function (ev) {
+        var validKey = false;
         switch (event.which) {
             case 87: // Up
                 keyboard.moveUp = true;
+                validKey = true;
                 break;
             case 65: // Left
                 keyboard.moveLeft = true;
+                validKey = true;
                 break;
             case 68: // Right 
                 keyboard.moveRight = true;
+                validKey = true;
                 break;
             case 16: // Shift 
                 keyboard.usePowerUp = true;
+                validKey = true;
                 break;
         }
 
-        ev.originalEvent.preventDefault();
+        if (validKey) {
+            ev.originalEvent.preventDefault();
+        }
+        box2d.moveHero();
     },
 
     keyUpHandler: function (ev) {
+        var validKey = false;
         switch (event.which) {
             case 87: // Up
-                keyboard.moveUp = true;
+                keyboard.moveUp = false;
+                validKey = true;
                 break;
             case 65: // Left
-                keyboard.moveLeft = true;
+                keyboard.moveLeft = false;
+                validKey = true;
                 break;
             case 68: // Right 
-                keyboard.moveRight = true;
+                keyboard.moveRight = false;
+                validKey = true;
                 break;
             case 16: // Shift 
-                keyboard.usePowerUp = true;
+                keyboard.usePowerUp = false;
+                validKey = true;
                 break;
         }
 
-        ev.originalEvent.preventDefault();
+        if (validKey) {
+            ev.originalEvent.preventDefault();
+        }
+        box2d.moveHero();
     },
 }
