@@ -46,7 +46,6 @@
 
     //Pan the screen to center on newCenter
     panTo: function (newCenter) {
-        console.log("Pan to center: " + newCenter);
         if (Math.abs(newCenter - game.offsetLeft - game.canvas.width / 4) > 0
         && game.offsetLeft <= game.maxOffset && game.offsetLeft >= game.minOffset) {
             var deltaX = Math.round((newCenter - game.offsetLeft - game.canvas.width / 4) / 2);
@@ -91,8 +90,8 @@
 
 
     animate: function () {
-        // Move character
-        game.readInput();
+        // move hero same invokes at keyboard listeners
+        box2d.moveHero();
 
         // Animate the background
         game.handlePanning();
@@ -117,48 +116,6 @@
         if (!game.ended) {
             game.animationFrame = window.requestAnimationFrame(game.animate, game.canvas);
         }
-    },
-
-    readInput: function () {
-        var vel = game.hero.GetLinearVelocity();
-        var desiredVelX = 0;
-        var desiredVelY = vel.y;
-        var jumped = false;
-        switch (keyboard.moveState)
-        {
-            case "up":
-                if (game.hero.numFootContacts > 0) {
-                    jumped = true;
-                    desiredVelY = 30;
-                    //console.log("up");
-                }
-                console.log(game.hero.numFootContacts + " numFootContatcts");
-                break;
-            case "left":
-                var rvel = vel.x - 0.7;
-                desiredVelX = rvel > -5 ? rvel : -5;
-                //console.log("left " + desiredVelX);
-                break;
-            case "right":
-                var rvel = vel.x + 0.7;
-                desiredVelX = rvel < 5 ? rvel : 5;
-                //console.log("right " + desiredVelX);
-                break;
-            case "stop":
-                desiredVelX = vel.x * 0.98;
-                if (-0.5 < desiredVelX && desiredVelX < 0.5) {
-                    keyboard.moveState = undefined;
-                }
-                //console.log("stop " + desiredVelX);
-                break;
-        }
-
-        var velChangeX = desiredVelX - vel.x;
-        var velChangeY = desiredVelY - vel.y;
-        var impulseX = game.hero.GetMass() * velChangeX; //disregard time factor
-        var impulseY = game.hero.GetMass() * velChangeY; //disregard time factor
-        game.hero.ApplyImpulse(new b2Vec2(impulseX, impulseY), game.hero.GetWorldCenter());
-
     },
 
     drawAllBodies: function () {

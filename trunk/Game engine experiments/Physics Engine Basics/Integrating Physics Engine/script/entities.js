@@ -13,9 +13,9 @@
             restitution: 0.4,
         },
         "dirt": {
-            density: 3.0,
-            friction: 1.5,
-            restitution: 0.2,
+            density: 1,
+            friction: 1,
+            restitution: 0.1,
         },
         "rock": {
             density: 3.0,
@@ -36,7 +36,7 @@
             width: 30,
             height: 50,
             density: 1,
-            friction: 0.5,
+            friction: 0,
             restitution: 0,
         },
         "box": {
@@ -89,15 +89,15 @@
                 fixtureDef.shape = new b2PolygonShape;
                 var points = [
                 new b2Vec2(0, 0),
-                new b2Vec2(0.3, 0.55),
-                new b2Vec2(-0.3, 0.55),
+                new b2Vec2(0.29, 0.51),
+                new b2Vec2(-0.29, 0.51),
                 ];
                 fixtureDef.shape.SetAsArray(points, points.length);
                 fixtureDef.isSensor = true;
                 footSensorFixture = game.hero.CreateFixture(fixtureDef);
                 footSensorFixture.SetUserData(375); // random choosen stupid magic number
                 game.hero.numFootContacts = 0;
-                //numFootContacts = 0;
+                game.hero.jumped = false;
                 break;
             case "villain": // can be circles or rectangles
                 entity.health = definition.fullHealth;

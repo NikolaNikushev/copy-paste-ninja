@@ -40,12 +40,6 @@
     // As per the Box2d manual, the suggested iteration count for Box2D is 8 for velocity and 3 for position.
     var velocityIterations = 8;
     var positionIterations = 3;
-    function animate() {
-        world.Step(timeStep, velocityIterations, positionIterations);
-        world.ClearForces();
-        world.DrawDebugData();
-        setTimeout(animate, timeStep);
-    }
 
     function animate() {
         world.Step(timeStep, velocityIterations, positionIterations);

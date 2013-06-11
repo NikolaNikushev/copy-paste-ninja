@@ -144,6 +144,63 @@ var box2d = {
         }
 
         box2d.world.Step(timeStep, 8, 3);
+        box2d.world.ClearForces();
+    },
+
+    heroSpeedIncreaseStep: 1,
+    increaseHeroSpeed: function () {
+        box2d.heroSpeedIncreaseStep++;
+        return 0.1 * box2d.heroSpeedIncreaseStep;
+    },
+
+    moveHero: function () {
+        //console.log(game.hero.numFootContacts + " numFootContatcts");
+        var vel = game.hero.GetLinearVelocity();
+        var desiredVelX = 0;
+        var desiredVelY = vel.y;
+        var posToApply = game.hero.GetWorldCenter();
+
+        if (keyboard.moveUp) {
+            if (game.hero.numFootContacts > 0 && game.hero.jumped === false) {
+                game.hero.jumped = true;
+
+                setTimeout(function () {
+                    game.hero.jumped = false;
+                }, 100);
+                desiredVelY = 60;
+                console.log(posToApply);
+            }
+        }
+
+        if (keyboard.moveLeft) {
+            var rvel = vel.x - box2d.increaseHeroSpeed();
+            desiredVelX = rvel > -5 ? rvel : -5;
+        }
+
+        if (keyboard.moveRight) {
+            var rvel = vel.x + box2d.increaseHeroSpeed();
+            desiredVelX = rvel < 5 ? rvel : 5;
+        }
+
+        if (keyboard.usePowerUp) {
+
+        }
+
+        // Stop charakter if he doesn't move left or right
+        if (!keyboard.moveLeft && !keyboard.moveRight) {
+            desiredVelX = vel.x * 0.68;
+            box2d.heroSpeedIncreaseStep = 1;
+            if (-0.5 < desiredVelX && desiredVelX < 0.5) {
+                keyboard.moveState = undefined;
+            }
+        }
+
+        var velChangeX = desiredVelX - vel.x;
+        var velChangeY = desiredVelY - vel.y;
+        var impulseX = game.hero.GetMass() * velChangeX; //disregard time factor
+        var impulseY = game.hero.GetMass() * velChangeY; //disregard time factor
+
+        game.hero.ApplyImpulse(new b2Vec2(impulseX, impulseY), posToApply);
     },
 
 }
