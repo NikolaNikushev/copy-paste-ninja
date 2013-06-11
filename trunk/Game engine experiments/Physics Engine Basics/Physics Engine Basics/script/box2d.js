@@ -26,6 +26,7 @@
         createFloor();
         createRectangularBody();
         createNinja();
+        createComplexBody();
 
         // Create contact listeners and track events
         listenForContact();
@@ -50,6 +51,8 @@
         world.Step(timeStep, velocityIterations, positionIterations);
         world.ClearForces();
         world.DrawDebugData();
+
+        console.log(numFootContacts);
 
         // Custom Drawing
         if (ninja) {
@@ -139,8 +142,11 @@
         ninja.SetUserData({name:"special",life:250})
     }
 
+    numFootContacts = 0;
+
     function listenForContact(){
         var listener = new Box2D.Dynamics.b2ContactListener;
+
         listener.PostSolve = function(contact,impulse){
             var body1 = contact.GetFixtureA().GetBody();
             var body2 = contact.GetFixtureB().GetBody();
@@ -151,6 +157,38 @@
                 console.log("The special body was in a collision with impulse", impulseAlongNormal, "and its life has now become ", ninja.GetUserData().life);
             }
         };
+
+        listener.BeginContact = function (contact) {
+            //check if fixture A was the foot sensor
+            var fixtureUserData = contact.GetFixtureA().GetUserData();
+            if (fixtureUserData == 375) {
+                numFootContacts++;
+            }
+
+            //check if fixture B was the foot sensor
+            fixtureUserData = contact.GetFixtureB().GetUserData();
+            if (fixtureUserData == 3) {
+                numFootContacts++;
+            }
+        }
+
+        listener.EndContact = function (contact) {
+            //check if fixture A was the foot sensor
+            var fixtureUserData = contact.GetFixtureA().GetUserData();
+            if (fixtureUserData == 3) {
+                numFootContacts--;
+            }
+
+            //check if fixture B was the foot sensor
+            fixtureUserData = contact.GetFixtureB().GetUserData();
+            if (fixtureUserData == 3) {
+                numFootContacts--;
+            }
+        }
+
+
+
+
         world.SetContactListener(listener);
     }
 
@@ -182,4 +220,35 @@
         // Translate and rotate axis back to original position and angle
         context.rotate(-angle);
         context.translate(-position.x * scale, -position.y * scale);
+    }
+
+    function createComplexBody(){
+        var bodyDef = new b2BodyDef;
+        bodyDef.type = b2Body.b2_dynamicBody;
+        bodyDef.position.x = 350/scale;
+        bodyDef.position.y = 50/scale;
+
+        var body = world.CreateBody(bodyDef);
+
+        //Create first fixture and attach a circular shape to the body
+        var fixtureDef = new b2FixtureDef;
+        fixtureDef.density = 1.0;
+        fixtureDef.friction = 0.5;
+        fixtureDef.restitution = 0.7;
+        fixtureDef.shape = new b2CircleShape(40/scale);
+        body.CreateFixture(fixtureDef);
+
+        // Create second fixture and attach a polygon shape to the body
+        fixtureDef.shape = new b2PolygonShape;
+        var points = [
+        new b2Vec2(0,0),
+        new b2Vec2(40/scale,50/scale),
+        new b2Vec2(50/scale,100/scale),
+        new b2Vec2(-50/scale,100/scale),
+        new b2Vec2(-40/scale,50/scale),
+        ];
+        fixtureDef.shape.SetAsArray(points,points.length);
+        fixtureDef.isSensor = true;
+        footSensorFixture = body.CreateFixture(fixtureDef);
+        footSensorFixture.SetUserData(375); // random choosen stupid magic number
     }

@@ -65,9 +65,14 @@
     <Content Include="Scripts\jquery-2.0.2.min.js" />
     <Content Include="script\Box2dWeb-2.1.a.3.js" />
     <Content Include="script\entities.js" />
+    <Content Include="script\box2d.js" />
     <Content Include="script\game.js" />
+    <Content Include="script\keyboard.js" />
     <Content Include="script\levels.js" />
+    <Content Include="script\loader.js" />
+    <Content Include="script\polyfills.js" />
     <Content Include="script\script.js" />
+    <Content Include="style.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\jquery-2.0.2.min.map" />
   </ItemGroup>
