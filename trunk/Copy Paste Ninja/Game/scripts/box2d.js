@@ -31,24 +31,24 @@ var box2d = function () {
             box2d.world.SetDebugDraw(debugDraw);
 
             var listener = new Box2D.Dynamics.b2ContactListener;
-            //listener.PostSolve = function (contact, impulse) {
-            //    var body1 = contact.GetFixtureA().GetBody();
-            //    var body2 = contact.GetFixtureB().GetBody();
-            //    var entity1 = body1.GetUserData();
-            //    var entity2 = body2.GetUserData();
-            //    var impulseAlongNormal = Math.abs(impulse.normalImpulses[0]);
-            //    // This listener is called a little too often. Filter out very tiny impulses.
-            //    // After trying different values, 5 seems to work well
-            //    if (impulseAlongNormal > 5) {
-            //        // If objects have a health, reduce health by the impulse value
-            //        if (entity1.health) {
-            //            entity1.health -= impulseAlongNormal;
-            //        }
-            //        if (entity2.health) {
-            //            entity2.health -= impulseAlongNormal;
-            //        }
-            //    }
-            //};
+            listener.PostSolve = function (contact, impulse) {
+                var body1 = contact.GetFixtureA().GetBody();
+                var body2 = contact.GetFixtureB().GetBody();
+                var entity1 = body1.GetUserData();
+                var entity2 = body2.GetUserData();
+
+                if (entity1 && entity2) {
+                    if (entity1.type === "code" && entity2.type === "hero") {
+                        entity1.dead = true;
+                        console.log("dead");
+                    }
+
+                    if (entity2.type === "code" && entity1.type === "hero") {
+                        entity2.dead = true;
+                        console.log("dead");
+                    }
+                }
+            };
 
             listener.BeginContact = function (contact) {
                 //check if fixture A was the foot sensor

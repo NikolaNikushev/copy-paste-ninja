@@ -46,6 +46,10 @@
 
         this.body = box2d.world.CreateBody(bodyDef);
         this.body.SetFixedRotation(true);
+        this.data = {
+            type: "hero",
+        }
+        this.body.SetUserData(this.data);
 
         // Set user data
         //this.body.SetUserData(375);

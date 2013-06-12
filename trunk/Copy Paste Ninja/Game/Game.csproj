@@ -61,10 +61,13 @@
     <Content Include="scripts\box2d.js" />
     <Content Include="scripts\Box2dWeb-2.1.a.3.js" />
     <Content Include="scripts\entities.js" />
-    <Content Include="scripts\game.js" />
+    <Content Include="scripts\GameControler.js" />
+    <Content Include="scripts\GameEngine.js" />
+    <Content Include="scripts\Hero.js" />
+    <Content Include="scripts\jquery-2.0.2.js" />
     <Content Include="styles\GameScreens.css" />
     <Content Include="scripts\keyboard.js" />
-    <Content Include="scripts\levels.js" />
+    <Content Include="scripts\LevelsData.js" />
     <Content Include="scripts\loader.js" />
     <Content Include="scripts\polyfills.js" />
     <Content Include="scripts\script.js" />
