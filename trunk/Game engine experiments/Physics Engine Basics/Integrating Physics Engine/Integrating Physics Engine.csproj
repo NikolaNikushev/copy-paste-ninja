@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="game.html" />
+    <Content Include="images\bad-guys.png" />
     <Content Include="images\ninja.png" />
     <Content Include="packages.config" />
     <None Include="Scripts\jquery-2.0.2.intellisense.js" />
