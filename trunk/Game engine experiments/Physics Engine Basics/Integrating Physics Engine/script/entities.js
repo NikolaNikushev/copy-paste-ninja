@@ -38,7 +38,7 @@
         "ninja": {
             shape: "rectangle",
             fullHealth: 80,
-            width: 30,
+            width: 37,
             height: 50,
             density: 1,
             friction: 0,
@@ -104,7 +104,11 @@
                 game.hero.numFootContacts = 0;
                 game.hero.jumped = false;
                 game.hero.facing = "right";
-                game.hero.lastVelocitySign = 0;
+                game.hero.moving = false;
+                game.hero.animationFrame = 0;
+                game.hero.animationFrameCount = 3;
+                game.hero.animationFrameDelay = 0;
+                game.hero.animationFrameDelayCount = 5; // how many iterations to wait before advancing frame
                 break;
             case "villain": // can be circles or rectangles
                 entity.health = definition.fullHealth;
@@ -149,7 +153,22 @@
 
     drawHero: function (entity) {
         var image = entity.sprite;
-        var sx = 37; // The X coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
+
+        // The X coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
+        var sx = entity.width * game.hero.animationFrame;
+        
+        if (game.hero.moving) {
+            if (game.hero.animationFrameDelay === game.hero.animationFrameDelayCount) {
+                game.hero.animationFrameDelay = 0;
+                game.hero.animationFrame += 1;
+                if (game.hero.animationFrame >= game.hero.animationFrameCount) {
+                    game.hero.animationFrame = 0;
+                }
+            } else {
+                game.hero.animationFrameDelay += 1;
+            }
+        }
+
         // The Y coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
         if (game.hero.facing === "right") {
             var sy = 0; 
