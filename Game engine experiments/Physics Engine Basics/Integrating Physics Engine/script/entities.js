@@ -103,12 +103,12 @@
                 footSensorFixture.SetUserData(375); // random choosen stupid magic number
                 game.hero.numFootContacts = 0;
                 game.hero.jumped = false;
-                game.hero.facing = "right";
-                game.hero.moving = false;
+                game.hero.facingRight = true;
+                game.hero.speed = 0;
                 game.hero.animationFrame = 0;
-                game.hero.animationFrameCount = 3;
+                game.hero.animationFrameLength = 3;
                 game.hero.animationFrameDelay = 0;
-                game.hero.animationFrameDelayCount = 5; // how many iterations to wait before advancing frame
+                game.hero.animationFrameDelayLength = 5; // how many iterations to wait before advancing frame
                 break;
             case "villain": // can be circles or rectangles
                 entity.health = definition.fullHealth;
@@ -156,23 +156,43 @@
 
         // The X coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
         var sx = entity.width * game.hero.animationFrame;
-        
-        if (game.hero.moving) {
-            if (game.hero.animationFrameDelay === game.hero.animationFrameDelayCount) {
+
+
+        if (game.hero.speed !== 0) {
+            // change hero animating direction based on his movement direction
+            if (game.hero.speed > 0) {
+                game.hero.facingRight = true;
+            } else if (game.hero.speed < 0) {
+                game.hero.facingRight = false;
+            }
+
+            // Set animation frame delay based on hero's speed
+            var speed = Math.abs(game.hero.speed);
+            if (speed < 1) {
+                game.hero.animationFrameDelayLength = 20;
+            } else {
+                game.hero.animationFrameDelayLength = 5;
+            }
+            console.log(game.hero.animationFrameDelayLength + " " + speed);
+
+            // Set animation frame based on delay
+            if (game.hero.animationFrameDelay >= game.hero.animationFrameDelayLength) {
                 game.hero.animationFrameDelay = 0;
+
                 game.hero.animationFrame += 1;
-                if (game.hero.animationFrame >= game.hero.animationFrameCount) {
+                if (game.hero.animationFrame === game.hero.animationFrameLength) {
                     game.hero.animationFrame = 0;
                 }
-            } else {
-                game.hero.animationFrameDelay += 1;
             }
+
+            game.hero.animationFrameDelay += 1;
         }
 
         // The Y coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
-        if (game.hero.facing === "right") {
+        if (game.hero.facingRight) {
             var sy = 0; 
-        } else if (game.hero.facing === "left") {
+        } else {
+            // hero is facing left
             var sy = entity.height;
         }
 
