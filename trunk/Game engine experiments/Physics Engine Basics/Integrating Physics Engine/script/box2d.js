@@ -158,11 +158,7 @@ var box2d = {
         var vel = game.hero.GetLinearVelocity();
 
         // save value for animation direction
-        if (vel.x > 0) {
-            game.hero.facing = "right";
-        } else if (vel.x < 0) {
-            game.hero.facing = "left";
-        }
+        game.hero.speed = vel.x;
 
         var desiredVelX = 0;
         var desiredVelY = vel.y;
@@ -176,18 +172,15 @@ var box2d = {
                     game.hero.jumped = false;
                 }, 100);
                 desiredVelY = 60;
-                console.log(posToApply);
             }
         }
 
         if (keyboard.moveLeft) {
-            game.hero.moving = true;
             var rvel = vel.x - box2d.increaseHeroSpeed();
             desiredVelX = rvel > -5 ? rvel : -5;
         }
 
         if (keyboard.moveRight) {
-            game.hero.moving = true;
             var rvel = vel.x + box2d.increaseHeroSpeed();
             desiredVelX = rvel < 5 ? rvel : 5;
         }
@@ -198,7 +191,6 @@ var box2d = {
 
         // Stop charakter if he doesn't move left or right
         if (!keyboard.moveLeft && !keyboard.moveRight) {
-            game.hero.moving = false;
             desiredVelX = vel.x * 0.68;
             box2d.heroSpeedIncreaseStep = 1;
             if (-0.5 < desiredVelX && desiredVelX < 0.5) {
