@@ -17,6 +17,11 @@
             friction: 1,
             restitution: 0.1,
         },
+        "platform": {
+            density: 1,
+            friction: 1,
+            restitution: 0.1,
+        },
         "rock": {
             density: 3.0,
             friction: 1.5,
@@ -42,7 +47,7 @@
         "box": {
             shape: "rectangle",
             fullHealth: 80,
-            width: 30,
+            width: 37,
             height: 50,
             density: 1,
             friction: 0.5,
@@ -98,6 +103,8 @@
                 footSensorFixture.SetUserData(375); // random choosen stupid magic number
                 game.hero.numFootContacts = 0;
                 game.hero.jumped = false;
+                game.hero.facing = "right";
+                game.hero.lastVelocitySign = 0;
                 break;
             case "villain": // can be circles or rectangles
                 entity.health = definition.fullHealth;
@@ -130,13 +137,7 @@
                 break;
             case "villain":
             case "hero":
-                if (entity.shape == "circle") {
-                    game.context.drawImage(entity.sprite, 0, 0, entity.sprite.width, entity.sprite.height,
-                        -entity.radius - 1, -entity.radius - 1, entity.radius * 2 + 2, entity.radius * 2 + 2);
-                } else if (entity.shape == "rectangle") {
-                    game.context.drawImage(entity.sprite, 0, 0, entity.sprite.width, entity.sprite.height,
-                        -entity.width / 2 - 1, -entity.height / 2 - 1, entity.width + 2, entity.height + 2);
-                }
+                entities.drawHero(entity);
                 break;
             case "ground":
                 // do nothing... We will draw objects like the ground & slingshot separately
@@ -144,5 +145,31 @@
         }
         game.context.rotate(-angle);
         game.context.translate(-position.x * box2d.scale + game.offsetLeft, -position.y * box2d.scale);
+    },
+
+    drawHero: function (entity) {
+        var image = entity.sprite;
+        var sx = 37; // The X coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
+        // The Y coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
+        if (game.hero.facing === "right") {
+            var sy = 0; 
+        } else if (game.hero.facing === "left") {
+            var sy = entity.height;
+        }
+
+        // The width of the sub-rectangle of the source image to draw into the destination context. If not specified, the entire rectangle
+        // from the coordinates specified by sx and sy to the bottom-right corner of the image is used. If you specify a negative value,
+        // the image is flipped horizontally when drawn.
+        var sw = 37;
+        // The height of the sub-rectangle of the source image to draw into the destination context. If you specify a negative value, the image is flipped vertically when drawn.
+        var sh = 50;
+
+        var dx = -entity.width / 2 - 1; // The X coordinate in the destination canvas at which to place the top-left corner of the source image.
+        var dy = -entity.height / 2 - 1; // The Y coordinate in the destination canvas at which to place the top-left corner of the source image.
+        var dw = entity.width + 2; // The width to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in width when drawn.
+        var dh = entity.height + 2; // The height to draw the image in the destination canvas. This allows scaling of the drawn image. If not specified, the image is not scaled in height when drawn.
+
+        game.context.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh);
+        //game.context.drawImage(image, dx, dy, dw, dh);
     }
 }

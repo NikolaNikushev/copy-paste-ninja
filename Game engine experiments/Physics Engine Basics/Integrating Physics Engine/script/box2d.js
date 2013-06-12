@@ -156,6 +156,14 @@ var box2d = {
     moveHero: function () {
         //console.log(game.hero.numFootContacts + " numFootContatcts");
         var vel = game.hero.GetLinearVelocity();
+
+        // save value for animation direction
+        if (vel.x > 0) {
+            game.hero.facing = "right";
+        } else if (vel.x < 0) {
+            game.hero.facing = "left";
+        }
+
         var desiredVelX = 0;
         var desiredVelY = vel.y;
         var posToApply = game.hero.GetWorldCenter();
