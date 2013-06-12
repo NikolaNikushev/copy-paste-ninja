@@ -181,11 +181,13 @@ var box2d = {
         }
 
         if (keyboard.moveLeft) {
+            game.hero.moving = true;
             var rvel = vel.x - box2d.increaseHeroSpeed();
             desiredVelX = rvel > -5 ? rvel : -5;
         }
 
         if (keyboard.moveRight) {
+            game.hero.moving = true;
             var rvel = vel.x + box2d.increaseHeroSpeed();
             desiredVelX = rvel < 5 ? rvel : 5;
         }
@@ -196,6 +198,7 @@ var box2d = {
 
         // Stop charakter if he doesn't move left or right
         if (!keyboard.moveLeft && !keyboard.moveRight) {
+            game.hero.moving = false;
             desiredVelX = vel.x * 0.68;
             box2d.heroSpeedIncreaseStep = 1;
             if (-0.5 < desiredVelX && desiredVelX < 0.5) {
