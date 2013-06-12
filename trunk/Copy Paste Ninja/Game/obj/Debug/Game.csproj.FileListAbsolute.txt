@@ -1,0 +1,5 @@
+E:\Copy\Documents\Dropbox\CODE\Javascript Game Copy paste ninja\Copy Paste Ninja\Game\bin\Game.dll
+E:\Copy\Documents\Dropbox\CODE\Javascript Game Copy paste ninja\Copy Paste Ninja\Game\bin\Game.pdb
+E:\Copy\Documents\Dropbox\CODE\Javascript Game Copy paste ninja\Copy Paste Ninja\Game\obj\Debug\Game.csprojResolveAssemblyReference.cache
+E:\Copy\Documents\Dropbox\CODE\Javascript Game Copy paste ninja\Copy Paste Ninja\Game\obj\Debug\Game.dll
+E:\Copy\Documents\Dropbox\CODE\Javascript Game Copy paste ninja\Copy Paste Ninja\Game\obj\Debug\Game.pdb
