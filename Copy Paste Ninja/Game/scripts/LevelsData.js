@@ -18,6 +18,11 @@
                 { type: "block", name: "box", x: 620, y: 375, width: 50, height: 50 },
                 { type: "block", name: "box", x: 520, y: 375, width: 50, height: 50 },
 
+                // code
+                { type: "code", name: "code", x: 400, y: 290, width: 45, height: 30, isStatic: true, dead: false, score: 10 },
+                { type: "code", name: "code", x: 400, y: 550, width: 45, height: 30, isStatic: true, dead: false, score: 10 },
+                { type: "code", name: "code", x: 500, y: 390, width: 45, height: 30, isStatic: true, dead: false, score: 10 },
+
                 // hero
                 { type: "hero", name: "ninja", x: 150, y: 410 },
             ]

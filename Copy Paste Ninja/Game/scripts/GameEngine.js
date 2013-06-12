@@ -64,7 +64,15 @@
         for (var body = box2d.world.GetBodyList() ; body; body = body.GetNext()) {
             var entity = body.GetUserData();
             if (entity) {
-                entities.draw(entity, body.GetPosition(), body.GetAngle())
+                if (entity.dead) {
+                    box2d.world.DestroyBody(body);
+                    if (entity.type === "code") {
+                        score += entity.score;
+                        gameControler.updateScoreScreen(score);
+                    }
+                } else {
+                    entities.draw(entity, body.GetPosition(), body.GetAngle())
+                }
             }
         }
     }
@@ -102,7 +110,7 @@
             box2d.init();
 
             // TODO: make score
-            $('#score').html('Score: ' + score);
+            gameControler.updateScoreScreen(score);
 
             var level = levelsData[levelNumber];
 

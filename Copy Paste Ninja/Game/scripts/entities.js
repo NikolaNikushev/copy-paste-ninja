@@ -17,6 +17,11 @@
             friction: 1,
             restitution: 0.1,
         },
+        "code": {
+            density: 1,
+            friction: 1,
+            restitution: 0.1,
+        },
         "platform": {
             density: 1,
             friction: 1,
@@ -62,6 +67,11 @@
                 entity.sprite = loader.loadImage("images/entities/" + entity.name + ".png");
                 box2d.createRectangle(entity, definition);
                 break;
+            case "code": // simple rectangles
+                entity.shape = "rectangle";
+                entity.sprite = loader.loadImage("images/entities/" + entity.name + ".png");
+                box2d.createRectangle(entity, definition);
+                break;
             case "ground": // simple rectangles
                 // No need for health. These are indestructible
                 entity.shape = "rectangle";
@@ -94,6 +104,7 @@
         engine.context.rotate(angle);
         switch (entity.type) {
             case "block":
+            case "code":
                 engine.context.drawImage(entity.sprite, 0, 0, entity.sprite.width, entity.sprite.height,
                 -entity.width/2-1, -entity.height/2-1, entity.width+2, entity.height+2);
                 break;

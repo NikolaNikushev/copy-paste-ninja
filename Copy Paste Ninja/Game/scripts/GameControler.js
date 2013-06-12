@@ -82,5 +82,9 @@
             engine.lastUpdateTime = undefined;
             engine.loadLevel(engine.getLevelNumber() + 1);
         },
+
+        updateScoreScreen: function (score) {
+            $('#score').html('Score: ' + score);
+        }
     };
 }();
