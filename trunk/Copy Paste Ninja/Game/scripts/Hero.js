@@ -6,6 +6,13 @@
         return 0.1 * box2d.heroSpeedIncreaseStep;
     }
 
+    // Prototype inherit function needed for Parasitic Combination Inheritance pattern.
+    function inheritPrototype(subType, superType) {
+        var prototype = Object.create(superType.prototype); //create object
+        prototype.constructor = subType; //augment object
+        subType.prototype = prototype; //assign object
+    }
+
     function DynamicGameObject(entity) {
 
         this.width = entity.width || 37;
@@ -200,6 +207,20 @@
         this.body.ApplyImpulse(new b2Vec2(impulseX, impulseY), posToApply);
     }
 
+    function BadNinja(entity, age) {
+        DynamicGameObject.call(this, entity);
+        // add custom fields...
+        this.age = age;
+    }
+    inheritPrototype(BadNinja, DynamicGameObject);
+
+    // add or overwrite methods
+    BadNinja.prototype.sayAge = function () {
+        alert(this.age);
+    };
+
+
+
     return {
         create: function (entity) {
             if (entity.name === "ninja") {
@@ -213,6 +234,11 @@
                 return new VilianNiki(entity);
             } else if (entity.name === "goro") {
                 return new VilianGoro(entity);
+            } else if (entity.name === "badninja") {
+                return new BadNinja(entity, 28);
+            } else {
+                // TODO: exception throw etc...
+                console.log("eroro");
             }
         }
     };
