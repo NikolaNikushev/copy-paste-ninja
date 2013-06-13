@@ -126,18 +126,20 @@
             for (var i = 0; i < level.entities.length; i++) {
                 var entity = level.entities[i];
                 if (entity.type === "hero") {
+                    var ninjaHero;
                     switch (entity.name) {
                         case "ninja":
                             player = hero.create(entity);
-                            ninjas.push(player);
+                            ninjaHero = player;
                             break;
                         case "badninja":
-                            var badninja = hero.create(entity);
-                            ninjas.push(badninja);
+                            ninjaHero = hero.create(entity);
                             break;
                         default:
                             // TODO: THROOW EXCEPTION
                     }
+
+                    ninjas.push(ninjaHero);
                 } else {
                     entities.create(entity);
                 }

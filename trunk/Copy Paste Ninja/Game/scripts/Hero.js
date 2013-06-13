@@ -191,7 +191,7 @@
         }
 
         // Stop charakter if he doesn't move left or right
-        if (!keyboard.moveLeft && !keyboard.moveRight) {
+        if (!this.moveLeft && !this.moveRight) {
             desiredVelX = vel.x * 0.68;
             this.heroSpeedIncreaseStep = 1;
             if (-0.5 < desiredVelX && desiredVelX < 0.5) {
@@ -203,14 +203,13 @@
         var velChangeY = desiredVelY - vel.y;
         var impulseX = this.body.GetMass() * velChangeX; //disregard time factor
         var impulseY = this.body.GetMass() * velChangeY; //disregard time factor
-
         this.body.ApplyImpulse(new b2Vec2(impulseX, impulseY), posToApply);
     }
 
     function BadNinja(entity, age) {
         DynamicGameObject.call(this, entity);
         // add custom fields...
-        this.age = age;
+        this.moveLeft = true;
     }
     inheritPrototype(BadNinja, DynamicGameObject);
 
@@ -219,7 +218,11 @@
         alert(this.age);
     };
 
+    BadNinja.prototype.aiUpdate= function () {
+        // logika koqto promenq neshtoto
 
+        update();
+    };
 
     return {
         create: function (entity) {
