@@ -111,6 +111,7 @@
 
             //Initialize Box2D world whenever a new level is loaded
             box2d.init();
+            ninjas = [];
 
             // TODO: make score
             gameControler.updateScoreScreen(score);
