@@ -40,12 +40,10 @@ var box2d = function () {
                 if (entity1 && entity2) {
                     if (entity1.type === "code" && entity2.type === "hero") {
                         entity1.dead = true;
-                        console.log("dead");
                     }
 
                     if (entity2.type === "code" && entity1.type === "hero") {
                         entity2.dead = true;
-                        console.log("dead");
                     }
                 }
             };

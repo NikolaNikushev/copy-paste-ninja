@@ -1,7 +1,7 @@
 ﻿var keyboard = {
     moveLeft: false,
     moveRight: false,
-    moveUp: false,
+    jump: false,
     usePowerUp: false,
 
     init: function () {
@@ -13,7 +13,7 @@
         var validKey = false;
         switch (event.which) {
             case 87: // Up
-                keyboard.moveUp = true;
+                keyboard.jump = true;
                 validKey = true;
                 break;
             case 65: // Left
@@ -32,15 +32,15 @@
 
         if (validKey) {
             ev.originalEvent.preventDefault();
+            engine.updateInput(keyboard.moveLeft, keyboard.moveRight, keyboard.jump, keyboard.usePowerUp);
         }
-        engine.hero.update();
     },
 
     keyUpHandler: function (ev) {
         var validKey = false;
         switch (event.which) {
             case 87: // Up
-                keyboard.moveUp = false;
+                keyboard.jump = false;
                 validKey = true;
                 break;
             case 65: // Left
@@ -59,7 +59,7 @@
 
         if (validKey) {
             ev.originalEvent.preventDefault();
+            engine.updateInput(keyboard.moveLeft, keyboard.moveRight, keyboard.jump, keyboard.usePowerUp);
         }
-        engine.hero.update();
     },
 }

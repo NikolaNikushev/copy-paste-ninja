@@ -79,6 +79,11 @@
 
         this.jumpPauseCount = 0;
         this.heroSpeedIncreaseStep = 1;
+
+        this.jump = false;
+        this.moveLeft = false;
+        this.moveRight = false;
+        this.usePowerUp = false;
     
     }
 
@@ -153,7 +158,7 @@
         var desiredVelY = vel.y;
         var posToApply = this.body.GetWorldCenter();
 
-        if (keyboard.moveUp) {
+        if (this.jump) {
             if (this.sensorData.numFootContacts > 0 && this.jumpPauseCount > JumpPauseLength) {
                 this.jumpPauseCount = 0;
                 desiredVelY = 60;
@@ -162,20 +167,20 @@
             }
         }
 
-        if (keyboard.moveLeft) {
+        if (this.moveLeft) {
             var rvel = vel.x - increaseHeroSpeed(this.heroSpeedIncreaseStep);
             this.heroSpeedIncreaseStep += 1;
             desiredVelX = rvel > -5 ? rvel : -5;
         }
 
-        if (keyboard.moveRight) {
+        if (this.moveRight) {
             var rvel = vel.x + increaseHeroSpeed(this.heroSpeedIncreaseStep);
             this.heroSpeedIncreaseStep += 1;
             desiredVelX = rvel < 5 ? rvel : 5;
         }
 
-        if (keyboard.usePowerUp) {
-
+        if (this.usePowerUp) {
+            // TODO: implement
         }
 
         // Stop charakter if he doesn't move left or right

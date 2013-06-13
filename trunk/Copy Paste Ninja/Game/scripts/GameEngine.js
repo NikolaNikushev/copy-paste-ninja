@@ -10,6 +10,8 @@
     var foregroundImage;
     var gameEnded;
 
+    var player;
+
     function setLevelNumber(value) {
         levelNumber = 0;
     }
@@ -22,7 +24,7 @@
         }
 
         if (mode == "playing") {
-            panTo(engine.hero.getPosX() * box2d.scale);
+            panTo(player.getPosX() * box2d.scale);
         }
 
         if (mode == "level-success" || mode == "level-failure") {
@@ -122,7 +124,7 @@
             for (var i = 0; i < level.entities.length; i++) {
                 var entity = level.entities[i];
                 if (entity.type === "hero") {
-                    engine.hero = hero.create(entity);
+                    player = hero.create(entity);
                 } else {
                     entities.create(entity);
                 }
@@ -137,8 +139,8 @@
         },
 
         animate: function () {
-            // move hero same invokes at keyboard listeners
-            engine.hero.update();
+            // Update player movement calcualtions
+            player.update();
 
             // Animate the background
             handlePanning();
@@ -161,7 +163,7 @@
             drawAllBodies();
 
             // Draw player
-            engine.hero.draw();
+            player.draw();
 
             // Debug draw
             box2d.world.DrawDebugData();
@@ -169,6 +171,13 @@
             if (!gameEnded) {
                 engine.animationFrame = window.requestAnimationFrame(engine.animate, engine.canvas);
             }
+        },
+
+        updateInput: function (moveLeft, moveRight, jump, usePowerUp) {
+            player.moveLeft = moveLeft;
+            player.moveRight = moveRight;
+            player.jump = jump;
+            player.usePowerUp = usePowerUp;
         }
     };
 }();
