@@ -1,4 +1,5 @@
-﻿var keyboard = {
+﻿"use strict";
+var keyboard = {
     moveLeft: false,
     moveRight: false,
     jump: false,

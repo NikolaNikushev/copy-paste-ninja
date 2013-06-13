@@ -1,4 +1,5 @@
-﻿var gameControler = function () {
+﻿"use strict";
+var gameControler = function () {
 
     function showEndingScreen() {
         if (mode == "level-success") {

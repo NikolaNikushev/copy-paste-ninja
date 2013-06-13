@@ -1,4 +1,5 @@
-﻿hero = function () {
+﻿"use strict";
+var hero = function () {
 
     var JumpPauseLength = 3;
 
@@ -10,11 +11,11 @@
     function inheritPrototype(subType, superType) {
         var prototype = Object.create(superType.prototype); //create object
         prototype.constructor = subType; //augment object
+        prototype.parent = superType.prototype; // save variable for calling parent methods
         subType.prototype = prototype; //assign object
     }
 
     function DynamicGameObject(entity) {
-
         this.width = entity.width || 37;
         this.height = entity.height || 50;
 
@@ -91,7 +92,6 @@
         this.moveLeft = false;
         this.moveRight = false;
         this.usePowerUp = false;
-    
     }
 
     DynamicGameObject.prototype.getPosX = function () {
@@ -218,10 +218,14 @@
         alert(this.age);
     };
 
-    BadNinja.prototype.aiUpdate= function () {
-        // logika koqto promenq neshtoto
+    BadNinja.prototype.update = function () {
+        // mandatory call to parents update
+        this.parent.update.call(this);
+        console.log(this.getPosX());
 
-        update();
+    };
+
+    BadNinja.prototype.patrool = function () {
     };
 
     return {
