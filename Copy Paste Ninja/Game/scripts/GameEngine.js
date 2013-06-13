@@ -26,7 +26,7 @@ var engine = function () {
         }
 
         if (mode == "playing") {
-            panTo(player.getPosX() * box2d.scale);
+            panTo(player.getPosX());
         }
 
         if (mode == "level-success" || mode == "level-failure") {

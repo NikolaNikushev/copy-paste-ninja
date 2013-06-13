@@ -96,12 +96,12 @@ var hero = function () {
 
     DynamicGameObject.prototype.getPosX = function () {
         var position = this.body.GetPosition();
-        return position.x;
+        return position.x * box2d.scale;
     }
 
     DynamicGameObject.prototype.getPosY = function () {
         var position = this.body.GetPosition();
-        return position.y;
+        return position.y * box2d.scale;
     }
 
     DynamicGameObject.prototype.draw = function () {
