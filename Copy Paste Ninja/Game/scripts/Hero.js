@@ -47,7 +47,7 @@
         var fixtureDef = new b2FixtureDef;
         fixtureDef.density = entity.density || 1.0;
         fixtureDef.friction = entity.friction || 0;
-        fixtureDef.restitution = entity.restitution || 0;
+        fixtureDef.restitution = entity.restitution || 0.1;
         fixtureDef.shape = new b2PolygonShape;
         fixtureDef.shape.SetAsBox(this.width / 2 / box2d.scale, this.height / 2 / box2d.scale);
 
