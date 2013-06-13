@@ -11,6 +11,7 @@
     var gameEnded;
 
     var player;
+    var ninjas = [];
 
     function setLevelNumber(value) {
         levelNumber = 0;
@@ -124,7 +125,18 @@
             for (var i = 0; i < level.entities.length; i++) {
                 var entity = level.entities[i];
                 if (entity.type === "hero") {
-                    player = hero.create(entity);
+                    switch (entity.name) {
+                        case "ninja":
+                            player = hero.create(entity);
+                            ninjas.push(player);
+                            break;
+                        case "badninja":
+                            var badninja = hero.create(entity);
+                            ninjas.push(badninja);
+                            break;
+                        default:
+                            // TODO: THROOW EXCEPTION
+                    }
                 } else {
                     entities.create(entity);
                 }
@@ -140,7 +152,9 @@
 
         animate: function () {
             // Update player movement calcualtions
-            player.update();
+            for (var i = 0; i < ninjas.length; i++) {
+                ninjas[i].update();
+            }
 
             // Animate the background
             handlePanning();
@@ -162,8 +176,10 @@
             // Draw all the bodies
             drawAllBodies();
 
-            // Draw player
-            player.draw();
+            // Draw all ninjas
+            for (var i = 0; i < ninjas.length; i++) {
+                ninjas[i].draw();
+            }
 
             // Debug draw
             box2d.world.DrawDebugData();
