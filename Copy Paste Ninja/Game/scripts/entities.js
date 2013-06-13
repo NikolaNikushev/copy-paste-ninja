@@ -1,4 +1,5 @@
-﻿var entities = {
+﻿"use strict";
+var entities = {
     definitions: {
         "glass": {
             fullHealth: 100,

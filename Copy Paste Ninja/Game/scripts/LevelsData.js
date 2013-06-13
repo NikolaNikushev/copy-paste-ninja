@@ -1,4 +1,5 @@
-﻿var levelsData = [
+﻿"use strict";
+var levelsData = [
 
         { // First level
             foreground: 'desert-foreground',

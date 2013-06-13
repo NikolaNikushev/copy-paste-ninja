@@ -1,4 +1,5 @@
-﻿$(window).load(function () {
+﻿"use strict";
+$(window).load(function () {
     gameControler.init();
 
     // for debuging purpose

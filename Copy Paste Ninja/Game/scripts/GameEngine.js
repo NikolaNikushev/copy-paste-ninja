@@ -1,4 +1,5 @@
-﻿var engine = function () {
+﻿"use strict";
+var engine = function () {
     var mode = ""; // Game mode
     var maxSpeed = 7; // Maximum panning speed per frame in pixels
     var minOffset = 0; // Minimum and Maximum panning offset

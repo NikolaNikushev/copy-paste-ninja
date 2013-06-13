@@ -1,4 +1,5 @@
-﻿// Set up requestAnimationFrame and cancelAnimationFrame for use in the game code
+﻿"use strict";
+// Set up requestAnimationFrame and cancelAnimationFrame for use in the game code
 (function () {
     var lastTime = 0;
     var vendors = ['ms', 'moz', 'webkit', 'o'];
