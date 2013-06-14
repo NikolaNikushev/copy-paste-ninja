@@ -228,6 +228,7 @@ var hero = function () {
     BadNinja.prototype.patrool = function () {
     };
 
+    /* Nakov */
     var VilianNakov = function (entity) {
         DynamicGameObject.call(this, entity);
         this.moveRight = true;
@@ -239,8 +240,68 @@ var hero = function () {
 
     VilianNakov.prototype.update = function () {
         this.parent.update.call(this);
+        this.patrol();
+    }
+
+    VilianNakov.prototype.patrol = function () {
         var currPositionX = this.getPosX();
-        console.log(this.maxRight);
+        if (currPositionX > this.maxRight) {
+            this.moveRight = false;
+            this.moveLeft = true;
+        }
+
+        if (currPositionX < this.minLeft) {
+            this.moveRight = true;
+            this.moveLeft = false;
+        }
+    }
+
+    /* Niki */
+    var VilianNiki = function (entity) {
+        DynamicGameObject.call(this, entity);
+        this.moveRight = true;
+        this.jump = true;
+
+        this.maxRight = entity.maxRight;
+        this.minLeft = entity.minLeft;
+    }
+    inheritPrototype(VilianNiki, DynamicGameObject);
+
+    VilianNiki.prototype.update = function () {
+        this.parent.update.call(this);
+        this.patrol();
+    }
+
+    VilianNiki.prototype.patrol = function () {
+        var currPositionX = this.getPosX();
+        if (currPositionX > this.maxRight) {
+            this.moveRight = false;
+            this.moveLeft = true;
+        }
+
+        if (currPositionX < this.minLeft) {
+            this.moveRight = true;
+            this.moveLeft = false;
+        }
+    }
+
+    /* Doncho */
+    var VilianDoncho = function (entity) {
+        DynamicGameObject.call(this, entity);
+        this.moveRight = true;
+
+        this.maxRight = entity.maxRight;
+        this.minLeft = entity.minLeft;
+    }
+    inheritPrototype(VilianDoncho, DynamicGameObject);
+
+    VilianDoncho.prototype.update = function () {
+        this.parent.update.call(this);
+        this.patrol();
+    }
+
+    VilianDoncho.prototype.patrol = function () {
+        var currPositionX = this.getPosX();
         if (currPositionX > this.maxRight) {
             this.moveRight = false;
             this.moveLeft = true;
