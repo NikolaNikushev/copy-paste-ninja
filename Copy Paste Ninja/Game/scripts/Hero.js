@@ -221,7 +221,7 @@ var hero = function () {
     BadNinja.prototype.update = function () {
         // mandatory call to parents update
         this.parent.update.call(this);
-        console.log(this.getPosX());
+        //console.log(this.getPosX());
 
     };
 

@@ -1,24 +1,63 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
 <head>
-    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>Copy Paste Ninja</title>
-    <script src="scripts/jasmine/jasmine.js"></script>
-     <script src="scripts/jquery-2.0.2.js"></script>
-    <script src="scripts/Box2dWeb-2.1.a.3.js"></script>
-    <script src="scripts/box2d.js"></script>
-    <script src="scripts/entities.js"></script>
-    <script src="scripts/GameEngine.js"></script>
-    <script src="scripts/keyboard.js"></script>
-    <script src="scripts/LevelsData.js"></script>
-    <script src="scripts/loader.js"></script>
-    <script src="scripts/polyfills.js"></script>
-    <script src="scripts/GameControler.js"></script>
-    <script src="scripts/Hero.js"></script>
-    <script src="scripts/script.js"></script>
+  <title>Jasmine Spec Runner</title>
+
+  <link rel="stylesheet" type="text/css" href="scripts/jasmine/jasmine.css">
+  <script type="text/javascript" src="scripts/jasmine/jasmine.js"></script>
+  <script type="text/javascript" src="scripts/jasmine/jasmine-html.js"></script>
+
+  <!-- include source files here... -->
+  <script src="scripts/jquery-2.0.2.js"></script>
+  <script src="scripts/Box2dWeb-2.1.a.3.js"></script>
+  <script src="scripts/box2d.js"></script>
+  <script src="scripts/entities.js"></script>
+  <script src="scripts/GameEngine.js"></script>
+  <script src="scripts/keyboard.js"></script>
+  <script src="scripts/LevelsData.js"></script>
+  <script src="scripts/loader.js"></script>
+  <script src="scripts/polyfills.js"></script>
+  <script src="scripts/GameControler.js"></script>
+  <script src="scripts/Hero.js"></script>
+  <script src="scripts/script.js"></script>
+
+  <!-- include spec files here... -->
+ 
+
+  <script type="text/javascript">
+    (function() {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+
+      jasmineEnv.addReporter(htmlReporter);
+
+      jasmineEnv.specFilter = function(spec) {
+        return htmlReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function() {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+
+    })();
+  </script>
+
 </head>
+
 <body>
-   <div id="result">3</div>
+    <div id="result">3</div>
      <div id="gamecontainer">
         <canvas id="gamecanvas" width="800" height="600" class="gamelayer"></canvas>
 
@@ -65,6 +104,6 @@
     </div>
 
     <canvas id="debugcanvas" width="1300" height="600" style="border: 1px solid black;"></canvas>
-        <script src="scripts/jasmine-samples/Tests.js"></script>
+    <script type="text/javascript" src="scripts/Tests/Tests.js"></script>
 </body>
 </html>
