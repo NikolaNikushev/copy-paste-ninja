@@ -56,6 +56,7 @@ var hero = function () {
         this.body.SetFixedRotation(true);
         this.data = {
             type: "hero",
+            name: entity.name
         }
         this.body.SetUserData(this.data);
 
@@ -232,7 +233,6 @@ var hero = function () {
     var VilianNakov = function (entity) {
         DynamicGameObject.call(this, entity);
         this.moveRight = true;
-        
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
     }
@@ -261,7 +261,6 @@ var hero = function () {
         DynamicGameObject.call(this, entity);
         this.moveRight = true;
         this.jump = true;
-
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
     }
@@ -289,7 +288,6 @@ var hero = function () {
     var VilianDoncho = function (entity) {
         DynamicGameObject.call(this, entity);
         this.moveRight = true;
-
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
     }
