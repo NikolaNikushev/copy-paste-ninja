@@ -38,13 +38,38 @@ var box2d = function () {
                 var entity1 = body1.GetUserData();
                 var entity2 = body2.GetUserData();
 
+                function checkIfVilian(heroName) {
+                    var vilian = false;
+                    if (heroName == "nakov") {
+                        vilian = true;
+                    }
+
+                    if (heroName == "niki") {
+                        vilian = true;
+                    }
+
+                    if (heroName == "doncho") {
+                        vilian = true;
+                    }
+
+                    if (heroName == "goro") {
+                        vilian = true;
+                    }
+
+                    return vilian;
+                }
+
                 if (entity1 && entity2) {
                     if (entity1.type === "code" && entity2.type === "hero") {
-                        entity1.dead = true;
+                        if (!checkIfVilian(entity2.name)) {
+                            entity1.dead = true;
+                        }
                     }
 
                     if (entity2.type === "code" && entity1.type === "hero") {
-                        entity2.dead = true;
+                        if (!checkIfVilian(entity1.name)) {
+                            entity2.dead = true;
+                        }
                     }
                 }
             };
