@@ -38,6 +38,8 @@ var box2d = function () {
                 var entity1 = body1.GetUserData();
                 var entity2 = body2.GetUserData();
 
+                // TODO: That's just a test for now, as this check should somehow pass the dead property, 
+                // but skip the Destroy method, as now, the 'code' entity behaves like static for vilian
                 function checkIfVilian(heroName) {
                     var vilian = false;
                     if (heroName == "nakov") {
