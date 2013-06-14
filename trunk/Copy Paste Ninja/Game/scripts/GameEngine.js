@@ -136,6 +136,9 @@ var engine = function () {
                         case "badninja":
                             ninjaHero = hero.create(entity);
                             break;
+                        case "nakov":
+                            ninjaHero = hero.create(entity);
+                            break;
                         default:
                             // TODO: THROOW EXCEPTION
                     }

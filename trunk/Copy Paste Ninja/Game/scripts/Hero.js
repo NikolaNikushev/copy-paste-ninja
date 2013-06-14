@@ -228,6 +228,30 @@ var hero = function () {
     BadNinja.prototype.patrool = function () {
     };
 
+    var VilianNakov = function (entity) {
+        DynamicGameObject.call(this, entity);
+        this.moveRight = true;
+        
+        this.maxRight = entity.maxRight;
+        this.minLeft = entity.minLeft;
+    }
+    inheritPrototype(VilianNakov, DynamicGameObject);
+
+    VilianNakov.prototype.update = function () {
+        this.parent.update.call(this);
+        var currPositionX = this.getPosX();
+        console.log(this.maxRight);
+        if (currPositionX > this.maxRight) {
+            this.moveRight = false;
+            this.moveLeft = true;
+        }
+
+        if (currPositionX < this.minLeft) {
+            this.moveRight = true;
+            this.moveLeft = false;
+        }
+    }
+
     return {
         create: function (entity) {
             if (entity.name === "ninja") {

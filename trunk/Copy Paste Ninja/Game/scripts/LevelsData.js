@@ -27,7 +27,8 @@ var levelsData = [
 
                 // hero
                 { type: "hero", name: "ninja", x: 150, y: 410 },
-                { type: "hero", name: "badninja", x: 550, y: 410 },
+                //{ type: "hero", name: "badninja", x: 550, y: 410 },
+                { type: "hero", name: "nakov", x: 650, y: 410, minLeft: 500, maxRight: 900 },
             ]
         },
 
