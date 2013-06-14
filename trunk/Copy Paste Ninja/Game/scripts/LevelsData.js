@@ -2,8 +2,8 @@
 var levelsData = [
 
         { // First level
-            foreground: 'desert-foreground',
-            background: 'clouds-background',
+            foreground: 'columns-foreground',
+            background: 'hall-background',
             entities: [
                 // prevent hero moving out of the world
                 { type: "ground", name: "dirt", x: 1280 / 2, y: 600 - 15, width: 1280, height: 30, isStatic: true },
@@ -32,8 +32,8 @@ var levelsData = [
         },
 
         { // Second level
-            foreground: 'desert-foreground',
-            background: 'clouds-background',
+            foreground: 'columns-foreground',
+            background: 'hall-background',
             entities: [
                 // prevent hero moving out of the world
                 { type: "ground", name: "dirt", x: 1280 / 2, y: 600 - 15, width: 1280, height: 30, isStatic: true },
