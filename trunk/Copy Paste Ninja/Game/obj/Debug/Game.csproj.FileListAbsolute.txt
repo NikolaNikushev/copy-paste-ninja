@@ -3,3 +3,13 @@ E:\Copy\Documents\Dropbox\CODE\Javascript Game Copy paste ninja\Copy Paste Ninja
 E:\Copy\Documents\Dropbox\CODE\Javascript Game Copy paste ninja\Copy Paste Ninja\Game\obj\Debug\Game.csprojResolveAssemblyReference.cache
 E:\Copy\Documents\Dropbox\CODE\Javascript Game Copy paste ninja\Copy Paste Ninja\Game\obj\Debug\Game.dll
 E:\Copy\Documents\Dropbox\CODE\Javascript Game Copy paste ninja\Copy Paste Ninja\Game\obj\Debug\Game.pdb
+C:\Users\Nikola\Desktop\copy-paste-ninja\trunk\Copy Paste Ninja\Game\bin\Game.dll
+C:\Users\Nikola\Desktop\copy-paste-ninja\trunk\Copy Paste Ninja\Game\bin\Game.pdb
+C:\Users\Nikola\Desktop\copy-paste-ninja\trunk\Copy Paste Ninja\Game\obj\Debug\Game.csprojResolveAssemblyReference.cache
+C:\Users\Nikola\Desktop\copy-paste-ninja\trunk\Copy Paste Ninja\Game\obj\Debug\Game.dll
+C:\Users\Nikola\Desktop\copy-paste-ninja\trunk\Copy Paste Ninja\Game\obj\Debug\Game.pdb
+C:\Users\Nikola\Desktop\ copy-paste-ninjaTrue\Copy Paste Ninja\Game\bin\Game.dll
+C:\Users\Nikola\Desktop\ copy-paste-ninjaTrue\Copy Paste Ninja\Game\bin\Game.pdb
+C:\Users\Nikola\Desktop\ copy-paste-ninjaTrue\Copy Paste Ninja\Game\obj\Debug\Game.csprojResolveAssemblyReference.cache
+C:\Users\Nikola\Desktop\ copy-paste-ninjaTrue\Copy Paste Ninja\Game\obj\Debug\Game.dll
+C:\Users\Nikola\Desktop\ copy-paste-ninjaTrue\Copy Paste Ninja\Game\obj\Debug\Game.pdb
