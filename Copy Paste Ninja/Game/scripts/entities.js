@@ -122,6 +122,7 @@ var entities = function () {
 
         // take the entity, create a Box2D body, and add it to the world
         create: function (entity) {
+            var body = undefined;
             var definition = definitions[entity.name];
             if (!definition) {
                 console.log("Undefined entity name", entity.name);
@@ -134,23 +135,23 @@ var entities = function () {
                     entity.fullHealth = definition.fullHealth;
                     entity.shape = "rectangle";
                     entity.sprite = loader.loadImage("images/entities/" + entity.name + ".png");
-                    createRectangle(entity, definition);
+                    body = createRectangle(entity, definition);
                     break;
                 case "code": // simple rectangles
                     entity.shape = "rectangle";
                     entity.sprite = loader.loadImage("images/entities/" + entity.name + ".png");
-                    createRectangle(entity, definition);
+                    body = createRectangle(entity, definition);
                     break;
                 case "ground": // simple rectangles
                     // No need for health. These are indestructible
                     entity.shape = "rectangle";
                     // No need for sprites. These won't be drawn at all
-                    createRectangle(entity, definition);
+                    body = createRectangle(entity, definition);
                     break;
                 default:
-                    console.log("Undefined entity type", entity.type);
-                    break;
+                    throw new Error("Undefined entity type ", entity.type);
             }
+            return body;
         },
 
         // take the entity, its position, and its angle and draw it on the game canvas

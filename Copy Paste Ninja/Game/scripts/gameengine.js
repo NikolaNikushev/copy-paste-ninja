@@ -161,7 +161,7 @@ var engine = function () {
                             ninjaHero = hero.create(entity);
                             break;
                         default:
-                            // TODO: THROOW EXCEPTION
+                            throw new Error("No such hero exists!|");
                     }
 
                     ninjas.push(ninjaHero);

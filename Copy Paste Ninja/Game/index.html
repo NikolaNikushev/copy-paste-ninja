@@ -9,13 +9,14 @@
     <script src="scripts/entities.js"></script>
     <script src="scripts/gameengine.js"></script>
     <script src="scripts/keyboard.js"></script>
-    <script src="scripts/levelsData.js"></script>
+    <script src="scripts/levelsdata.js"></script>
     <script src="scripts/loader.js"></script>
     <script src="scripts/polyfills.js"></script>
     <script src="scripts/gamecontroler.js"></script>
     <script src="scripts/hero.js"></script>
     <script src="scripts/physicssimulation.js"></script>
     <link href="styles/gamescreens.css" rel="stylesheet" />
+    <link href="styles/menustyles.css" rel="stylesheet" />
 </head>
 <body>
     <div id="gamecontainer">
@@ -64,5 +65,100 @@
     </div>
 
     <canvas id="debugcanvas" width="1300" height="600" style="border: 1px solid black;"></canvas>
+
+      <div id="wrapper">
+        <div id="left">
+            <fieldset>
+                <legend>High Scores:
+                </legend>
+                <table class="scoreTable">
+                    <tr>
+                        <td class="loadingScores">Loading Scores...</td>
+                    </tr>
+                </table>
+            </fieldset>
+
+        </div>
+
+        <div id="right">
+            <div id="loginForm">
+                <form action="http://www.copy-paste-ninja.moshensky.com/php/login.php" method="post" class="ajax">
+                    <fieldset>
+                        <legend>Login</legend>
+                        <table>
+                            <tr>
+                                <td>Username:</td>
+                                <td>
+                                    <input class="input-bar" type="text" name="username" placeholder="username" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Password:</td>
+                                <td>
+                                    <input class="input-bar" type="password" name="password" placeholder="password" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <input class="button-style" type="submit" value="login" />
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div id="registerForm">
+                <form action="http://www.copy-paste-ninja.moshensky.com/php/register.php" method="post" class="ajax">
+                    <fieldset>
+                        <legend>Register</legend>
+                        <table>
+                            <tr>
+                                <td>Username:</td>
+                                <td>
+                                    <input class="input-bar" type="text" name="username" placeholder="username" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Password:</td>
+                                <td>
+                                    <input class="input-bar" type="password" name="password" placeholder="password" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <input class="button-style" type="submit" value="register" />
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </form>
+
+            </div>
+        </div>
+
+        <div class="fb-like" data-href="http://developers.facebook.com/docs/reference/plugins/like" data-send="true" data-width="100%" data-show-faces="true"></div>
+    </div>
+    <div id="hiddenForms">
+        <form action="http://www.copy-paste-ninja.moshensky.com/php/uploadScore.php" method="post" class="ajax">
+            <input class="input-bar" type="text" name="username" placeholder="username" />
+            <input class="input-bar" type="text" name="score" placeholder="score" />
+            <input class="button-style" type="submit" value="upload" />
+        </form>
+
+
+        <!--<h1>Get high score</h1>
+    <p>Празни полета връща всички резултати.</p>
+    <p>При попълнено поле за username без полето date връща всички резултати за потребителя.</p>
+    <p>При попълнено поле date без полето username връща всички резултати за дадената дата.</p>
+    <p>При попълнени пвсички полета връща връща резултат по точно зададениете данни.</p>-->
+        <form action="http://www.copy-paste-ninja.moshensky.com/php/getScore.php" method="post" class="ajax">
+            <input class="input-bar" type="text" name="username" placeholder="username" />
+            <input class="input-bar" type="text" name="date" placeholder="date" />
+            <input id="getScore" class="button-style" type="submit" value="GetScore" />
+        </form>
+    </div>
+
+
+    <script src="scripts/server.js"></script>
 </body>
 </html>

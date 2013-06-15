@@ -1,5 +1,8 @@
 ﻿"use strict";
 
+
+
+
 // Declare all the commonly used objects as variables for convenience
 var B2Vec2 = Box2D.Common.Math.b2Vec2;
 var B2BodyDef = Box2D.Dynamics.b2BodyDef;
@@ -23,7 +26,25 @@ $(window).load(function () {
     // start level directly
     var level = 1;
     //engine.newGame(level - 1);
+
+    // server side things and menus (not games one)
+    var scoreTable = $("#getScore");
+    scoreTable.click();
+
+
+    /*
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    */
+
 });
+
+
 
 
 
