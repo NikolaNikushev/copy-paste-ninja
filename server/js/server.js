@@ -2,19 +2,21 @@ var phpDirectory = "php/";
 
 function login(respons){
 	if(respons === "true"){
-		console.log("login succeeded!");
+		alert("Login succeeded")
+		window.location = "game.html";
 	}
 	else{
-		console.log("login unsucceeded!");
+		alert("login unsucceeded!");
 	}
 }
 
 function register(respons){
 	if(respons === "true"){
-		console.log("register succeeded!");
+		alert("register succeeded!");
+		window.location = "game.html";
 	}
 	else{
-		console.log("register unsucceeded!");
+		alert("register unsucceeded!");
 	}
 }
 
