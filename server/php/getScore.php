@@ -10,19 +10,19 @@ if($_POST)
 
 	if($username != "" && $date != "")
 	{
-		$select = mysql_query("SELECT * FROM HightScore WHERE PlayerName='" . $username ."' AND Date='". $date . "'");
+		$select = mysql_query("SELECT * FROM HightScore WHERE PlayerName='" . $username ."' AND Date='". $date . "' ORDER BY HightScore DESC");
 	}
 	else if($username == "" && $date == "")
 	{
-		$select = mysql_query("SELECT * FROM HightScore");
+		$select = mysql_query("SELECT * FROM HightScore ORDER BY HightScore DESC");
 	}
 	else if($date == "")
 	{
-		$select = mysql_query("SELECT * FROM HightScore WHERE PlayerName='" . $username ."'");
+		$select = mysql_query("SELECT * FROM HightScore WHERE PlayerName='" . $username ."' ORDER BY HightScore DESC");
 	}
 	else
 	{
-		$select = mysql_query("SELECT * FROM HightScore WHERE Date='". $date . "'");
+		$select = mysql_query("SELECT * FROM HightScore WHERE Date='". $date . "' ORDER BY HightScore DESC");
 	}
 
 	while($row = mysql_fetch_array($select))
