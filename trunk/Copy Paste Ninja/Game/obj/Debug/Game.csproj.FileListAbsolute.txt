@@ -18,3 +18,8 @@ D:\SourceCode\TeamLychee\Copy Paste Ninja\Game\bin\Game.pdb
 D:\SourceCode\TeamLychee\Copy Paste Ninja\Game\obj\Debug\Game.csprojResolveAssemblyReference.cache
 D:\SourceCode\TeamLychee\Copy Paste Ninja\Game\obj\Debug\Game.dll
 D:\SourceCode\TeamLychee\Copy Paste Ninja\Game\obj\Debug\Game.pdb
+D:\TeamWork\Copy Paste Ninja\Game\bin\Game.dll
+D:\TeamWork\Copy Paste Ninja\Game\bin\Game.pdb
+D:\TeamWork\Copy Paste Ninja\Game\obj\Debug\Game.csprojResolveAssemblyReference.cache
+D:\TeamWork\Copy Paste Ninja\Game\obj\Debug\Game.dll
+D:\TeamWork\Copy Paste Ninja\Game\obj\Debug\Game.pdb

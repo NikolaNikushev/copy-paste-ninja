@@ -25,7 +25,7 @@
             padding-left: 8px;
         }
 
-        fieldset {
+        #right, #left {
             font-family: sans-serif;
             font-style: italic;
             font-weight: bolder;
@@ -37,56 +37,49 @@
             background-color: #61c249;
         }
 
-        #wrapper, #left, #right {
-            border: 1px solid #b6ff00;
-            display: inline-block;
-            float:left;
+        #right, #left {
+            height: 370px;
+            width: 400px;
         }
-        .scoreTable > tr th {
-            border:1px solid #000;
-            
+
+       #wrapper , #left, #right {
+            display: inline-block;
+            float: left;
+        }
+
+        #wrapper {
+            border: 1px solid #b6ff00;
+        }
+
+        .scoreTable, .scoreTable td, .scoreTable th {
+            border: 1px solid #000;
+            border-collapse: collapse;
+            color: red;
+            padding: 5px;
+        }
+
+        #hiddenForms {
+            display: none;
+        }
+
+        .loadingScores{
+            font-size: 40px;
+            font-weight: bold;;
+            color: red;
         }
     </style>
     <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
     <script type="text/javascript"></script>
 </head>
-<body>
+<body onload="initMenu()">
     <div id="wrapper">
         <div id="left">
             <fieldset>
-                <legend>
-                    High Scores:
+                <legend>High Scores:
                 </legend>
-                <table border="1" class="scoreTable">
+                <table class="scoreTable">
                     <tr>
-                        <th>Place</th>
-                        <th>Player's Name</th>
-                        <th>Best Score</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Pesho</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Gosho</td>
-                        <td>90</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Pesho</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Gosho</td>
-                        <td>90</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>Pesho</td>
-                        <td>100</td>
+                        <td class="loadingScores">Loading Scores...</td>
                     </tr>
                 </table>
             </fieldset>
@@ -100,17 +93,19 @@
                         <legend>Login</legend>
                         <table>
                             <tr>
+                                <td>Username:</td>
                                 <td>
                                     <input class="input-bar" type="text" name="username" placeholder="username" />
                                 </td>
                             </tr>
                             <tr>
+                                <td>Password:</td>
                                 <td>
                                     <input class="input-bar" type="password" name="password" placeholder="password" /></td>
                             </tr>
                             <tr>
-                                <td>
-                                    <input class="button-style" type="submit" value="submit" />
+                                <td colspan="2">
+                                    <input class="button-style" type="submit" value="login" />
                                 </td>
                             </tr>
                         </table>
@@ -118,60 +113,54 @@
                 </form>
             </div>
 
-            <div id="registerForm" style="display: none;">
+            <div id="registerForm">
                 <form action="php/register.php" method="post" class="ajax">
                     <fieldset>
                         <legend>Register</legend>
                         <table>
                             <tr>
+                                <td>Username:</td>
                                 <td>
                                     <input class="input-bar" type="text" name="username" placeholder="username" />
                                 </td>
                             </tr>
                             <tr>
+                                <td>Password:</td>
                                 <td>
-                                    <input class="input-bar" type="password" name="password" placeholder="password" /></td>
+                                    <input class="input-bar" type="password" name="password" placeholder="password" />
+                                </td>
                             </tr>
                             <tr>
-                                <td>
-                                    <input class="button-style" type="submit" value="register" /></td>
+                                <td colspan="2">
+                                    <input class="button-style" type="submit" value="register" />
+                                </td>
                             </tr>
                         </table>
                     </fieldset>
                 </form>
 
             </div>
-
-            <div>
-                <span><a href="#" onclick="onClickOnLogin()">Login</a></span>
-                <span>|</span>
-                <span><a href="#" onclick="onClickOnRegister()">Registration</a></span>
-            </div>
         </div>
     </div>
-
-    <!--<div>
-        <h1>Upload high score</h1>
+    <div id="hiddenForms">
         <form action="php/uploadScore.php" method="post" class="ajax">
             <input class="input-bar" type="text" name="username" placeholder="username" />
             <input class="input-bar" type="text" name="score" placeholder="score" />
             <input class="button-style" type="submit" value="upload" />
         </form>
-    </div>
 
 
-    <h1>Get high score</h1>
-    <!--<p>Празни полета връща всички резултати.</p>
+        <!--<h1>Get high score</h1>
+    <p>Празни полета връща всички резултати.</p>
     <p>При попълнено поле за username без полето date връща всички резултати за потребителя.</p>
     <p>При попълнено поле date без полето username връща всички резултати за дадената дата.</p>
-    <p>При попълнени пвсички полета връща връща резултат по точно зададениете данни.</p>
-    <div>
+    <p>При попълнени пвсички полета връща връща резултат по точно зададениете данни.</p>-->
         <form action="php/getScore.php" method="post" class="ajax">
             <input class="input-bar" type="text" name="username" placeholder="username" />
             <input class="input-bar" type="text" name="date" placeholder="date" />
-            <input class="button-style" type="submit" value="GetScore" />
+            <input id="getScore" class="button-style" type="submit" value="GetScore" />
         </form>
-    </div>-->
+    </div>
     <script type="text/javascript" src="js/server.js"></script>
 
     <script>
@@ -193,7 +182,10 @@
             }
         }
 
-
+        function initMenu() {
+            var scoreTable = $("#getScore");
+            scoreTable.click();
+        }
     </script>
 </body>
 </html>
