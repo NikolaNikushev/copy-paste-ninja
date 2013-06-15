@@ -31,7 +31,6 @@ var gameControler = function () {
         // Initialize objects
         initLevelSelectionScreen();
         loader.init();
-        keyboard.init();
 
         // Hide all game layers and display the start screen
         $('.gamelayer').hide();
@@ -62,6 +61,7 @@ var gameControler = function () {
 
         // start game
         startGame: function (levelNumber) {
+            keyboard.init();
             engine.newGame(levelNumber);
         },
 
