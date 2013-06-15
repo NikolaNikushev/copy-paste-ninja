@@ -1,44 +1,199 @@
 ﻿<html>
 <head>
-	<title></title>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <style>
+        .button-style {
+            background-color: #b6ff00;
+            color: #ff6a00;
+            border: 1px solid #fff;
+            height: 30px;
+            width: 80px;
+            font-size: 16px;
+            border-radius: 5px;
+            float: right;
+        }
 
+        .input-bar {
+            background-color: #b6ff00;
+            color: #000;
+            border: 1px solid #fff;
+            height: 30px;
+            width: 160px;
+            font-size: 16px;
+            border-radius: 5px;
+            padding-left: 8px;
+        }
+
+        fieldset {
+            font-family: sans-serif;
+            font-style: italic;
+            font-weight: bolder;
+            display: inline-block;
+            border: 3px solid #b6ff00;
+            border-radius: 20px;
+            color: #ff6a00;
+            padding: 20px;
+            background-color: #61c249;
+        }
+
+        #wrapper, #left, #right {
+            border: 1px solid #b6ff00;
+            display: inline-block;
+            float:left;
+        }
+        .scoreTable > tr th {
+            border:1px solid #000;
+            
+        }
     </style>
-	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-	<script type="text/javascript"></script>
+    <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+    <script type="text/javascript"></script>
 </head>
 <body>
-	<h1>Login</h1>
-	<form action="php/login.php" method="post" class="ajax">
-		<input type="text" name="username" placeholder="username"/>
-		<input type="password" name="password" placeholder="password"/>
-		<input class="button-style" type="submit" value="submit" />
-	</form>
+    <div id="wrapper">
+        <div id="left">
+            <fieldset>
+                <legend>
+                    High Scores:
+                </legend>
+                <table border="1" class="scoreTable">
+                    <tr>
+                        <th>Place</th>
+                        <th>Player's Name</th>
+                        <th>Best Score</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Pesho</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Gosho</td>
+                        <td>90</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Pesho</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Gosho</td>
+                        <td>90</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Pesho</td>
+                        <td>100</td>
+                    </tr>
+                </table>
+            </fieldset>
 
-	<h1>Registration</h1>
-	<form action="php/register.php" method="post" class="ajax">
-		<input type="text" name="username" placeholder="username"/>
-		<input type="password" name="password" placeholder="password"/>
-		<input class="button-style" type="submit" value="register" />
-	</form>
+        </div>
 
-	<h1>Upload high score</h1>
-	<form action="php/uploadScore.php" method="post" class="ajax">
-		<input type="text" name="username" placeholder="username"/>
-		<input type="text" name="score" placeholder="score"/>
-		<input class="button-style" type="submit" value="upload" />
-	</form>
-	<h1>Get high score</h1>
-	<p>Празни полета връща всички резултати.</p>
-	<p>При попълнено поле за username без полето date връща всички резултати за потребителя.</p>
-	<p>При попълнено поле date без полето username връща всички резултати за дадената дата.</p>
-	<p>При попълнени пвсички полета връща връща резултат по точно зададениете данни.</p>
-	<form action="php/getScore.php" method="post" class="ajax">
-		<input type="text" name="username" placeholder="username"/>
-		<input type="text" name="date" placeholder="date"/>
-		<input class="button-style" type="submit" value="GetScore" />
-	</form>
-	<script type="text/javascript" src="js/server.js"></script>
+        <div id="right">
+            <div id="loginForm">
+                <form action="php/login.php" method="post" class="ajax">
+                    <fieldset>
+                        <legend>Login</legend>
+                        <table>
+                            <tr>
+                                <td>
+                                    <input class="input-bar" type="text" name="username" placeholder="username" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input class="input-bar" type="password" name="password" placeholder="password" /></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input class="button-style" type="submit" value="submit" />
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div id="registerForm" style="display: none;">
+                <form action="php/register.php" method="post" class="ajax">
+                    <fieldset>
+                        <legend>Register</legend>
+                        <table>
+                            <tr>
+                                <td>
+                                    <input class="input-bar" type="text" name="username" placeholder="username" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input class="input-bar" type="password" name="password" placeholder="password" /></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input class="button-style" type="submit" value="register" /></td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </form>
+
+            </div>
+
+            <div>
+                <span><a href="#" onclick="onClickOnLogin()">Login</a></span>
+                <span>|</span>
+                <span><a href="#" onclick="onClickOnRegister()">Registration</a></span>
+            </div>
+        </div>
+    </div>
+
+    <!--<div>
+        <h1>Upload high score</h1>
+        <form action="php/uploadScore.php" method="post" class="ajax">
+            <input class="input-bar" type="text" name="username" placeholder="username" />
+            <input class="input-bar" type="text" name="score" placeholder="score" />
+            <input class="button-style" type="submit" value="upload" />
+        </form>
+    </div>
+
+
+    <h1>Get high score</h1>
+    <!--<p>Празни полета връща всички резултати.</p>
+    <p>При попълнено поле за username без полето date връща всички резултати за потребителя.</p>
+    <p>При попълнено поле date без полето username връща всички резултати за дадената дата.</p>
+    <p>При попълнени пвсички полета връща връща резултат по точно зададениете данни.</p>
+    <div>
+        <form action="php/getScore.php" method="post" class="ajax">
+            <input class="input-bar" type="text" name="username" placeholder="username" />
+            <input class="input-bar" type="text" name="date" placeholder="date" />
+            <input class="button-style" type="submit" value="GetScore" />
+        </form>
+    </div>-->
+    <script type="text/javascript" src="js/server.js"></script>
+
+    <script>
+        function onClickOnLogin() {
+            var selectFirst = $("#loginForm");
+            if (selectFirst.css("display") != "block") {
+                selectFirst.css("display", "");
+                var selectSecond = $("#registerForm");
+                selectSecond.css("display", "none");
+            }
+        }
+
+        function onClickOnRegister() {
+            var selectFirst = $("#registerForm");
+            if (selectFirst.css("display") != "block") {
+                selectFirst.css("display", "");
+                var selectSecond = $("#loginForm");
+                selectSecond.css("display", "none");
+            }
+        }
+
+
+    </script>
 </body>
 </html>
