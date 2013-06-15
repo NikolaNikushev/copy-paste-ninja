@@ -1,7 +1,10 @@
-<html>
+﻿<html>
 <head>
 	<title></title>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <style>
+
+    </style>
 	<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
 	<script type="text/javascript"></script>
 </head>
@@ -10,21 +13,21 @@
 	<form action="php/login.php" method="post" class="ajax">
 		<input type="text" name="username" placeholder="username"/>
 		<input type="password" name="password" placeholder="password"/>
-		<input type="submit" value="submit" />
+		<input class="button-style" type="submit" value="submit" />
 	</form>
 
 	<h1>Registration</h1>
 	<form action="php/register.php" method="post" class="ajax">
 		<input type="text" name="username" placeholder="username"/>
 		<input type="password" name="password" placeholder="password"/>
-		<input type="submit" value="register" />
+		<input class="button-style" type="submit" value="register" />
 	</form>
 
 	<h1>Upload high score</h1>
 	<form action="php/uploadScore.php" method="post" class="ajax">
 		<input type="text" name="username" placeholder="username"/>
 		<input type="text" name="score" placeholder="score"/>
-		<input type="submit" value="upload" />
+		<input class="button-style" type="submit" value="upload" />
 	</form>
 	<h1>Get high score</h1>
 	<p>Празни полета връща всички резултати.</p>
@@ -34,7 +37,7 @@
 	<form action="php/getScore.php" method="post" class="ajax">
 		<input type="text" name="username" placeholder="username"/>
 		<input type="text" name="date" placeholder="date"/>
-		<input type="submit" value="GetScore" />
+		<input class="button-style" type="submit" value="GetScore" />
 	</form>
 	<script type="text/javascript" src="js/server.js"></script>
 </body>
