@@ -2,82 +2,9 @@
 <head>
     <title></title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <style>
-        .button-style {
-            background-color: #b6ff00;
-            color: #ff6a00;
-            border: 1px solid #fff;
-            height: 30px;
-            width: 80px;
-            font-size: 16px;
-            border-radius: 5px;
-            float: right;
-        }
-
-        .input-bar {
-            background-color: #b6ff00;
-            color: #000;
-            border: 1px solid #fff;
-            height: 30px;
-            width: 160px;
-            font-size: 16px;
-            border-radius: 5px;
-            padding-left: 8px;
-        }
-
-        #right, #left {
-            font-family: sans-serif;
-            font-style: italic;
-            font-weight: bolder;
-            display: inline-block;
-            border: 3px solid #b6ff00;
-            border-radius: 20px;
-            color: #ff6a00;
-            padding: 20px;
-            background-color: #61c249;
-        }
-
-        #right, #left {
-            height: 370px;
-            width: 400px;
-        }
-
-        #left {
-            margin-right: 5px;
-        }
-
-       #wrapper , #left, #right {
-            display: inline-block;
-            float: left;
-        }
-
-        #wrapper {
-            border: 1px solid #b6ff00;
-        }
-
-        .scoreTable, .scoreTable td, .scoreTable th {
-            border: 1px solid #000;
-            border-collapse: collapse;
-            color: red;
-            padding: 5px;
-        }
-
-        #hiddenForms {
-            display: none;
-        }
-
-        .loadingScores{
-            font-size: 40px;
-            font-weight: bold;
-            color: red;
-        }
-
-        .fb-like {
-            margin: 20px;
-        }
-    </style>
     <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
     <script type="text/javascript"></script>
+    <link href="styles/menuStyles.css" rel="stylesheet" />
 </head>
 <body onload="initMenu()">
     <div id="wrapper">
@@ -173,38 +100,6 @@
     </div>
 
     <script type="text/javascript" src="js/server.js"></script>
-
-    <script>
-        function onClickOnLogin() {
-            var selectFirst = $("#loginForm");
-            if (selectFirst.css("display") != "block") {
-                selectFirst.css("display", "");
-                var selectSecond = $("#registerForm");
-                selectSecond.css("display", "none");
-            }
-        }
-
-        function onClickOnRegister() {
-            var selectFirst = $("#registerForm");
-            if (selectFirst.css("display") != "block") {
-                selectFirst.css("display", "");
-                var selectSecond = $("#loginForm");
-                selectSecond.css("display", "none");
-            }
-        }
-
-        function initMenu() {
-            var scoreTable = $("#getScore");
-            scoreTable.click();
-
-            (function (d, s, id) {
-                var js, fjs = d.getElementsByTagName(s)[0];
-                if (d.getElementById(id)) return;
-                js = d.createElement(s); js.id = id;
-                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-                fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-        }
-    </script>
+    <script type="text/javascript" src="js/menuInit.js"></script>
 </body>
 </html>
