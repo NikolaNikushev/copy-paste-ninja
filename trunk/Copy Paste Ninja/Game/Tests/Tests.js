@@ -109,136 +109,233 @@ describe("Keyboard", function () {
         })
     })
     describe("Tests for key ", function () {
-        //Needs KeyboardEvent to be simulated, as if the given key is pressed
-        var event = Object.create(KeyboardEvent);
-        var ev = jQuery.Event("keydown");
-        $(".selector").trigger(ev);
+        beforeEach(function() {
+            keyboard.moveLeft = false;
+            keyboard.moveRight = false;
+            keyboard.jump = false;
+            keyboard.usePowerUp = false;
+        })
 
         describe("press A", function () {
-
-            ev.keycode = 65;
-            ev.type = "keydown";
-            ev.which = 65;
+            beforeEach(function () {
+                keyboard.moveLeft = false;
+                keyboard.moveRight = false;
+                keyboard.jump = false;
+                keyboard.usePowerUp = false;
+                keyboard.keyDownHandler({ which: 65 });
+            })
             it("will get a valid command", function () {
-              
-                keyboard.keyDownHandler(event);
-                expect(keyboard.validKey).toBeTruthy();
+                var action = keyboard.moveLeft || keyboard.moveRight || keyboard.jump || keyboard.usePowerUp;
+                expect(action).toBeTruthy();
             })
             it("will move left", function () {
-                var action = keyboard.keyDownHandler(event);
-                expect(keyboard.moveLeft).toBeTruthy();
+                var action = keyboard.moveLeft;
+                expect(action).toBeTruthy();
             })
         })
 
         describe("press SHIFT", function () {
 
-            ev.keycode = 16;
-            ev.type = "keydown";
-            ev.which = 16;
-
+            beforeEach(function () {
+                keyboard.moveLeft = false;
+                keyboard.moveRight = false;
+                keyboard.jump = false;
+                keyboard.usePowerUp = false;
+                keyboard.keyDownHandler({ which: 16 });
+            })
             it("will get a valid command", function () {
-                var action = keyboard.keyDownHandler(ev);
-                expect(keyboard.validKey).toBeTruthy();
+                var action = keyboard.moveLeft || keyboard.moveRight || keyboard.jump || keyboard.usePowerUp
+                expect(action).toBeTruthy();
             })
             it("will use power up", function () {
-                var action = keyboard.keyDownHandler(ev);
-                expect(keyboard.usePowerUp).toBeTruthy();
+                var action = keyboard.usePowerUp;
+                expect(action).toBeTruthy();
             })
         })
 
         describe("press D", function () {
-
-            ev.keycode = 68;
-            ev.type = "keydown";
-            ev.which = 68;
-
+            beforeEach(function () {
+                keyboard.moveLeft = false;
+                keyboard.moveRight = false;
+                keyboard.jump = false;
+                keyboard.usePowerUp = false;
+                keyboard.keyDownHandler({ which: 68 });
+            })
             it("will get a valid command", function () {
-                var action = keyboard.keyDownHandler(ev);
-                expect(keyboard.validKey).toBeTruthy();
+                var action = keyboard.moveLeft || keyboard.moveRight || keyboard.jump || keyboard.usePowerUp
+                expect(action).toBeTruthy();
             })
             it("will move right", function () {
-                var action = keyboard.keyDownHandler(ev);
-                expect(keyboard.moveRight).toBeTruthy();
+                var action = keyboard.moveRight;
+                expect(action).toBeTruthy();
             })
         })
 
         describe("press W", function () {
-
-            ev.keycode = 87;
-            ev.type = "keydown";
-            ev.which = 87;
-
+           
+            beforeEach(function () {
+                keyboard.moveLeft = false;
+                keyboard.moveRight = false;
+                keyboard.jump = false;
+                keyboard.usePowerUp = false;
+                keyboard.keyDownHandler({ which: 87 });
+            })
             it("will get a valid command", function () {
-                var action = keyboard.keyDownHandler(ev);
-                expect(keyboard.validKey).toBeTruthy();
+                var action = keyboard.moveLeft || keyboard.moveRight || keyboard.jump || keyboard.usePowerUp;
+                expect(action).toBeTruthy();
             })
             it("will jump", function () {
-                var action = keyboard.keyDownHandler(ev);
-                expect(keyboard.jump).toBeTruthy();
+                var action = keyboard.jump;
+                expect(action).toBeTruthy();
             })
         })
         describe("release A", function () {
-
-            ev.keycode = 65;
-            ev.type = "keyup";
-            ev.which = 65;
+            beforeEach(function () {
+                keyboard.moveLeft = false;
+                keyboard.moveRight = false;
+                keyboard.jump = false;
+                keyboard.usePowerUp = false;
+                keyboard.keyUpHandler({ which: 65 });
+            })
 
             it("will get a valid command", function () {
-                var action = keyboard.keyUpHandler(ev);
-                expect(keyboard.validKey).toBeTruthy();
+                var action = keyboard.moveLeft || keyboard.moveRight || keyboard.jump || keyboard.usePowerUp
+                expect(action).toBeFalsy();
             })
             it("will stop moving left", function () {
-                var action = keyboard.keyUpHandler(ev);
-                expect(keyboard.moveLeft).toBeFalsy();
+
+                var action = keyboard.moveLeft;
+                expect(action).toBeFalsy();
             })
         })
 
         describe("release SHIFT", function () {
-
-            ev.keycode = 16;
-            ev.type = "keyup";
-            ev.which = 16;
-
+            beforeEach(function () {
+                keyboard.moveLeft = false;
+                keyboard.moveRight = false;
+                keyboard.jump = false;
+                keyboard.usePowerUp = false;
+                keyboard.keyUpHandler({ which: 16 });
+            })
             it("will get a valid command", function () {
-                var action = keyboard.keyUpHandler(ev);
-                expect(keyboard.validKey).toBeTruthy();
+                var action = keyboard.moveLeft || keyboard.moveRight || keyboard.jump || keyboard.usePowerUp;
+                expect(action).toBeFalsy();
             })
             it("will not use power up", function () {
-                var action = keyboard.keyUpHandler(ev);
-                expect(keyboard.usePowerUp).toBeFalsy();
+                var action = keyboard.usePowerUp;
+                expect(action).toBeFalsy();
             })
         })
 
         describe("release D", function () {
-
-            ev.keycode = 68;
-            ev.type = "keyup";
-            ev.which = 68;
+            beforeEach(function () {
+                keyboard.moveLeft = false;
+                keyboard.moveRight = false;
+                keyboard.jump = false;
+                keyboard.usePowerUp = false;
+                keyboard.keyUpHandler({ which: 68 });
+            })
 
             it("will get a valid command", function () {
-                var action = keyboard.keyUpHandler(ev);
-                expect(keyboard.validKey).toBeTruthy();
+                var action = keyboard.moveLeft || keyboard.moveRight || keyboard.jump || keyboard.usePowerUp;
+                expect(action).toBeFalsy();
             })
             it("will stop moving right", function () {
-                var action = keyboard.keyUpHandler(ev);
-                expect(keyboard.moveRight).toBeFalsy();
+                var action = keyboard.moveRight;
+                expect(action).toBeFalsy();
             })
         })
 
         describe("release W", function () {
-
-            ev.keycode = 87;
-            ev.type = "keyup";
-            ev.which = 87;
+            beforeEach(function () {
+                keyboard.moveLeft = false;
+                keyboard.moveRight = false;
+                keyboard.jump = false;
+                keyboard.usePowerUp = false;
+                keyboard.keyUpHandler({ which: 87 });
+            })
 
             it("will get a valid command", function () {
-                var action = keyboard.keyUpHandler(ev);
-                expect(keyboard.validKey).toBeTruthy();
+                var action = keyboard.moveLeft || keyboard.moveRight || keyboard.jump || keyboard.usePowerUp;
+                expect(action).toBeFalsy();
             })
             it("will stop jump", function () {
-                var action = keyboard.keyUpHandler(ev);
-                expect(keyboard.jump).toBeFalsy();
+                console.log(keyboard.jump);
+                var action = keyboard.jump;
+                expect(action).toBeFalsy();
             })
         })
     })
 })
+describe("LevelsData",function myfunction() {
+    describe("Entities", function () {
+        it("creates a hero", function () {
+            var entity = {
+                name: "ninja"
+            }
+            var newhero = hero.create(entity);
+            expect(newhero.data.name).toBe("ninja");
+            expect(newhero.data.type).toBe("hero");
+        });
+        describe("creates a villan", function () {
+            it("nakov", function () {
+                var entity = {
+                    name: "nakov"
+                }
+                var newhero = hero.create(entity);
+                expect(newhero.data.name).toBe("nakov");
+                expect(newhero.data.type).toBe("hero");
+                expect(newhero.moveRight).toBeTruthy();
+            });
+            it("nakov", function () {
+                var entity = {
+                    name: "niki"
+                }
+                var newhero = hero.create(entity);
+                expect(newhero.data.name).toBe("niki");
+                expect(newhero.data.type).toBe("hero");
+                expect(newhero.moveRight).toBeTruthy();
+            });
+
+            it("nakov", function () {
+                var entity = {
+                    name: "doncho"
+                }
+                var newhero = hero.create(entity);
+                expect(newhero.data.name).toBe("doncho");
+                expect(newhero.data.type).toBe("hero");
+                expect(newhero.moveRight).toBeTruthy();
+
+            });
+            //it("that does not exist", function () {
+            //    var entity = {
+            //        name: "Stefan"
+            //    }
+            //    expect(hero.create(entity)).toThrow(new Error("There is no such hero"));
+
+            //});
+        });
+        describe("creates",function() {
+            it("code", function () {
+                var entity = {
+                    name: "code",
+                    shape: "rectangle",
+                    isStatic: true,
+                    dead: false, 
+                    score: 10,
+                    sprite: loader.loadImage("images/entities/" + entity.name + ".png"),
+                    type: "code"
+                };
+                console.log(entities.createRectangle());
+                 
+                console.log(entities.createRectangle(entity, "code"));
+                var code = entities.createRectangle(entity, "code");
+               
+                console.log(code.GetUserData());
+                expect(code.name).toBe("code");
+                expect(code.type).toBe("code");
+               
+            });
+        });
+     });
+ });
