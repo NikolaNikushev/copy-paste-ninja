@@ -27,8 +27,19 @@ function uploadScore(respons){
 	}
 }
 
-function getScore(respons){
-	console.log(respons);
+function getScore(respons) {
+    respons = JSON.parse(respons);
+    var table = $(".scoreTable");
+    var text = "<tr><th>Place</th><th>Player's Name</th><th>Best Score</th><th>Date</th></tr>";
+
+    for (var index = 0; index < respons.length && index< 10; index++) {
+        text += "<tr><td>" + (index + 1) + "</td>";
+        text += "<td>" + respons[index].PlayerName + "</td>";
+        text += "<td>" + respons[index].HightScore + "</td>";
+        text += "<td>" + respons[index].Date + "</td></tr>";
+    }
+    table.html("");
+    table.append(text);
 }
 
 function submit () {
