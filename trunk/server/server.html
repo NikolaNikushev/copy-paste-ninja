@@ -42,6 +42,10 @@
             width: 400px;
         }
 
+        #left {
+            margin-right: 5px;
+        }
+
        #wrapper , #left, #right {
             display: inline-block;
             float: left;
@@ -64,8 +68,12 @@
 
         .loadingScores{
             font-size: 40px;
-            font-weight: bold;;
+            font-weight: bold;
             color: red;
+        }
+
+        .fb-like {
+            margin: 20px;
         }
     </style>
     <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
@@ -141,6 +149,8 @@
 
             </div>
         </div>
+
+        <div class="fb-like" data-href="http://developers.facebook.com/docs/reference/plugins/like" data-send="true" data-width="100%" data-show-faces="true"></div>
     </div>
     <div id="hiddenForms">
         <form action="php/uploadScore.php" method="post" class="ajax">
@@ -161,6 +171,7 @@
             <input id="getScore" class="button-style" type="submit" value="GetScore" />
         </form>
     </div>
+
     <script type="text/javascript" src="js/server.js"></script>
 
     <script>
@@ -185,6 +196,14 @@
         function initMenu() {
             var scoreTable = $("#getScore");
             scoreTable.click();
+
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
         }
     </script>
 </body>
