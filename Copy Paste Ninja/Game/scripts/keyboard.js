@@ -10,7 +10,7 @@ var keyboard = {
         $(document).keyup(keyboard.keyUpHandler);
     },
 
-    keyDownHandler: function (ev) {
+    keyDownHandler: function (event) {
         var validKey = false;
         switch (event.which) {
             case 87: // Up
@@ -32,12 +32,12 @@ var keyboard = {
         }
 
         if (validKey) {
-            ev.originalEvent.preventDefault();
+            event.originalEvent.preventDefault();
             engine.updateInput(keyboard.moveLeft, keyboard.moveRight, keyboard.jump, keyboard.usePowerUp);
         }
     },
 
-    keyUpHandler: function (ev) {
+    keyUpHandler: function (event) {
         var validKey = false;
         switch (event.which) {
             case 87: // Up
@@ -59,7 +59,7 @@ var keyboard = {
         }
 
         if (validKey) {
-            ev.originalEvent.preventDefault();
+            event.originalEvent.preventDefault();
             engine.updateInput(keyboard.moveLeft, keyboard.moveRight, keyboard.jump, keyboard.usePowerUp);
         }
     },

@@ -1,6 +1,6 @@
 ﻿"use strict";
-var entities = {
-    definitions: {
+var entities = function () {
+    var definitions = {
         "glass": {
             fullHealth: 100,
             density: 2.4,
@@ -50,70 +50,126 @@ var entities = {
             friction: 0.5,
             restitution: 0.1,
         },
-    },
+    };
 
-    // take the entity, create a Box2D body, and add it to the world
-    create: function (entity) {
-        var definition = entities.definitions[entity.name];
-        if(!definition){
-            console.log ("Undefined entity name", entity.name);
-            return;
+    var engine;
+    var loader;
+    var physicsSimulation;
+    var scale;
+
+    function createRectangle(entity, definition) {
+        var bodyDef = new B2BodyDef();
+        if (entity.isStatic) {
+            bodyDef.type = B2Body.b2_staticBody;
+        } else {
+            bodyDef.type = B2Body.b2_dynamicBody;
         }
 
-        switch (entity.type) {
-            case "block": // simple rectangles
-                entity.health = definition.fullHealth;
-                entity.fullHealth = definition.fullHealth;
-                entity.shape = "rectangle";
-                entity.sprite = loader.loadImage("images/entities/" + entity.name + ".png");
-                box2d.createRectangle(entity, definition);
-                break;
-            case "code": // simple rectangles
-                entity.shape = "rectangle";
-                entity.sprite = loader.loadImage("images/entities/" + entity.name + ".png");
-                box2d.createRectangle(entity, definition);
-                break;
-            case "ground": // simple rectangles
-                // No need for health. These are indestructible
-                entity.shape = "rectangle";
-                // No need for sprites. These won't be drawn at all
-                box2d.createRectangle(entity,definition);
-                break;
-            case "villain": // can be circles or rectangles
-                entity.health = definition.fullHealth;
-                entity.fullHealth = definition.fullHealth;
-                entity.sprite = loader.loadImage("images/"+entity.name+".png");
-                entity.shape = definition.shape;
-                if (definition.shape == "circle") {
-                    entity.radius = definition.radius;
-                    box2d.createCircle(entity,definition);
-                } else if (definition.shape == "rectangle") {
-                    entity.width = definition.width;
-                    entity.height = definition.height;
-                    box2d.createRectangle(entity, definition);
-                }
-                break;
-            default:
-                console.log("Undefined entity type", entity.type);
-                break;
+        bodyDef.position.x = entity.x / scale;
+        bodyDef.position.y = entity.y / scale;
+        if (entity.angle) {
+            bodyDef.angle = Math.PI * entity.angle / 180;
         }
-    },
 
-    // take the entity, its position, and its angle and draw it on the game canvas
-    draw: function (entity, position, angle) {
-        engine.context.translate(position.x * box2d.scale - engine.getOffsetLeft(), position.y * box2d.scale);
-        engine.context.rotate(angle);
-        switch (entity.type) {
-            case "block":
-            case "code":
-                engine.context.drawImage(entity.sprite, 0, 0, entity.sprite.width, entity.sprite.height,
-                -entity.width/2-1, -entity.height/2-1, entity.width+2, entity.height+2);
-                break;
-            case "ground":
-                // do nothing... We will draw objects like the ground & slingshot separately
-                break;
-        }
-        engine.context.rotate(-angle);
-        engine.context.translate(-position.x * box2d.scale + engine.getOffsetLeft(), -position.y * box2d.scale);
+        var fixtureDef = new B2FixtureDef();
+        fixtureDef.density = definition.density;
+        fixtureDef.friction = definition.friction;
+        fixtureDef.restitution = definition.restitution;
+
+        fixtureDef.shape = new B2PolygonShape();
+        fixtureDef.shape.SetAsBox(entity.width / 2 / scale, entity.height / 2 / scale);
+
+        var body = physicsSimulation.addBody(bodyDef);
+        body.SetUserData(entity);
+        var fixture = body.CreateFixture(fixtureDef);
+        return body;
     }
-}
+
+    function createCircle(entity, definition) {
+        var bodyDef = new B2BodyDef();
+        if (entity.isStatic) {
+            bodyDef.type = B2Body.b2_staticBody;
+        } else {
+            bodyDef.type = B2Body.b2_dynamicBody;
+        }
+
+        bodyDef.position.x = entity.x / scale;
+        bodyDef.position.y = entity.y / scale;
+        if (entity.angle) {
+            bodyDef.angle = Math.PI * entity.angle / 180;
+        }
+
+        var fixtureDef = new B2FixtureDef();
+        fixtureDef.density = definition.density;
+        fixtureDef.friction = definition.friction;
+        fixtureDef.restitution = definition.restitution;
+
+        fixtureDef.shape = new B2CircleShape(entity.radius / scale);
+
+        var body = physicsSimulation.addBody(bodyDef);
+        body.SetUserData(entity);
+        var fixture = body.CreateFixture(fixtureDef);
+        return body;
+    }
+
+    return {
+        init: function (vLoader, vPhysicsSimulation, vEngine) {
+            engine = vEngine;
+            physicsSimulation = vPhysicsSimulation;
+            loader = vLoader;
+            scale = physicsSimulation.getScale();
+        },
+
+        // take the entity, create a Box2D body, and add it to the world
+        create: function (entity) {
+            var definition = definitions[entity.name];
+            if (!definition) {
+                console.log("Undefined entity name", entity.name);
+                return;
+            }
+
+            switch (entity.type) {
+                case "block": // simple rectangles
+                    entity.health = definition.fullHealth;
+                    entity.fullHealth = definition.fullHealth;
+                    entity.shape = "rectangle";
+                    entity.sprite = loader.loadImage("images/entities/" + entity.name + ".png");
+                    createRectangle(entity, definition);
+                    break;
+                case "code": // simple rectangles
+                    entity.shape = "rectangle";
+                    entity.sprite = loader.loadImage("images/entities/" + entity.name + ".png");
+                    createRectangle(entity, definition);
+                    break;
+                case "ground": // simple rectangles
+                    // No need for health. These are indestructible
+                    entity.shape = "rectangle";
+                    // No need for sprites. These won't be drawn at all
+                    createRectangle(entity, definition);
+                    break;
+                default:
+                    console.log("Undefined entity type", entity.type);
+                    break;
+            }
+        },
+
+        // take the entity, its position, and its angle and draw it on the game canvas
+        draw: function (entity, position, angle) {
+            engine.context.translate(position.x * scale - engine.getOffsetLeft(), position.y * scale);
+            engine.context.rotate(angle);
+            switch (entity.type) {
+                case "block":
+                case "code":
+                    engine.context.drawImage(entity.sprite, 0, 0, entity.sprite.width, entity.sprite.height,
+                    -entity.width / 2 - 1, -entity.height / 2 - 1, entity.width + 2, entity.height + 2);
+                    break;
+                case "ground":
+                    // do nothing... We will draw objects like the ground & slingshot separately
+                    break;
+            }
+            engine.context.rotate(-angle);
+            engine.context.translate(-position.x * scale + engine.getOffsetLeft(), -position.y * scale);
+        }
+
+    };
+}();

@@ -1,21 +1,9 @@
 ﻿"use strict";
 var gameControler = function () {
-
-    function showEndingScreen() {
-        if (mode == "level-success") {
-            if (engine.getLevelNumber() < levels.data.length - 1) {
-                $('#endingmessage').html('Level Complete. Well Done!!!');
-                $("#playnextlevel").show();
-            } else {
-                $('#endingmessage').html('All Levels Complete. Well Done!!!');
-                $("#playnextlevel").hide();
-            }
-        } else if (mode == "level-failure") {
-            $('#endingmessage').html('Failed. Play Again?');
-            $("#playnextlevel").hide();
-        }
-        $('#endingscreen').show();
-    }
+    var keyboard;
+    var engine;
+    var loader;
+    var levelsData;
 
     function showLevelScreen() {
         $('.gamelayer').hide();
@@ -27,7 +15,7 @@ var gameControler = function () {
         var html = "";
         for (var i = 0; i < levelsData.length; i++) {
             html += '<input type = "button" value = "' + (i + 1) + '">';
-        };
+        }
 
         $('#levelselectscreen').html(html);
 
@@ -58,7 +46,12 @@ var gameControler = function () {
 
     return {
 
-        init: function () {
+        init: function (vKeyboard, vEngine, vLoader, vLevelsData) {
+            keyboard = vKeyboard;
+            engine = vEngine;
+            loader = vLoader;
+            levelsData = vLevelsData;
+
             initializeControler();
         },
 
@@ -86,6 +79,29 @@ var gameControler = function () {
 
         updateScoreScreen: function (score) {
             $('#score').html('Score: ' + score);
+        },
+
+        showGameScreen: function () {
+            $('.gamelayer').hide();
+            // Display the game canvas and score
+            $('#gamecanvas').show();
+            $('#scorescreen').show();
+        },
+
+        showEndingScreen: function (mode) {
+            if (mode === "level-success") {
+                if (engine.getLevelNumber() < levelsData.length - 1) {
+                    $('#endingmessage').html('Level Complete. Well Done!!!');
+                    $("#playnextlevel").show();
+                } else {
+                    $('#endingmessage').html('All Levels Complete. Well Done!!!');
+                    $("#playnextlevel").hide();
+                }
+            } else if (mode === "level-failure") {
+                $('#endingmessage').html('Failed. Play Again?');
+                $("#playnextlevel").hide();
+            }
+            $('#endingscreen').show();
         }
     };
 }();

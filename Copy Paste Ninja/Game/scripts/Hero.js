@@ -1,10 +1,12 @@
 ﻿"use strict";
 var hero = function () {
+    var physicsSimulation;
+    var scale;
 
     var JumpPauseLength = 3;
 
     function increaseHeroSpeed(heroSpeedIncreaseStep) {
-        return 0.1 * box2d.heroSpeedIncreaseStep;
+        return 0.1 * heroSpeedIncreaseStep;
     }
 
     // Prototype inherit function needed for Parasitic Combination Inheritance pattern.
@@ -40,24 +42,24 @@ var hero = function () {
 
 
         // Add GameObject to world physics simulator
-        var bodyDef = new b2BodyDef;
-        bodyDef.type = b2Body.b2_dynamicBody;
-        bodyDef.position.x = entity.x / box2d.scale;
-        bodyDef.position.y = entity.y / box2d.scale;
+        var bodyDef = new B2BodyDef();
+        bodyDef.type = B2Body.b2_dynamicBody;
+        bodyDef.position.x = entity.x / scale;
+        bodyDef.position.y = entity.y / scale;
 
-        var fixtureDef = new b2FixtureDef;
+        var fixtureDef = new B2FixtureDef();
         fixtureDef.density = entity.density || 1.0;
         fixtureDef.friction = entity.friction || 0;
         fixtureDef.restitution = entity.restitution || 0.1;
-        fixtureDef.shape = new b2PolygonShape;
-        fixtureDef.shape.SetAsBox(this.width / 2 / box2d.scale, this.height / 2 / box2d.scale);
+        fixtureDef.shape = new B2PolygonShape();
+        fixtureDef.shape.SetAsBox(this.width / 2 / scale, this.height / 2 / scale);
 
-        this.body = box2d.world.CreateBody(bodyDef);
+        this.body = physicsSimulation.addBody(bodyDef);
         this.body.SetFixedRotation(true);
         this.data = {
             type: "hero",
             name: entity.name
-        }
+        };
         this.body.SetUserData(this.data);
 
         // Set user data
@@ -67,12 +69,12 @@ var hero = function () {
 
         // add foot sensor fixture
         // Create second fixture and attach a polygon shape to the body
-        var fixtureDef = new b2FixtureDef;
-        fixtureDef.shape = new b2PolygonShape;
+        fixtureDef = new B2FixtureDef();
+        fixtureDef.shape = new B2PolygonShape();
         var points = [
-        new b2Vec2(0, 0),
-        new b2Vec2(0.29, 0.51),
-        new b2Vec2(-0.29, 0.51),
+        new B2Vec2(0, 0),
+        new B2Vec2(0.29, 0.51),
+        new B2Vec2(-0.29, 0.51),
         ];
         fixtureDef.shape.SetAsArray(points, points.length);
         fixtureDef.isSensor = true;
@@ -82,7 +84,7 @@ var hero = function () {
         this.sensorData = {
             evaluateJump: true,
             numFootContacts: 0,
-        }
+        };
 
         footSensorFixture.SetUserData(this.sensorData); // random choosen stupid magic number
 
@@ -97,16 +99,15 @@ var hero = function () {
 
     DynamicGameObject.prototype.getPosX = function () {
         var position = this.body.GetPosition();
-        return position.x * box2d.scale;
-    }
+        return position.x * scale;
+    };
 
     DynamicGameObject.prototype.getPosY = function () {
         var position = this.body.GetPosition();
-        return position.y * box2d.scale;
-    }
+        return position.y * scale;
+    };
 
     DynamicGameObject.prototype.draw = function () {
-
         // The X coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
         var sx = this.width * this.animationFrame;
 
@@ -142,18 +143,19 @@ var hero = function () {
         }
 
         // The Y coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
+        var sy;
         if (this.facingRight) {
-            var sy = 0; 
+            sy = 0;
         } else {
             // hero is facing left
-            var sy = this.height;
+            sy = this.height;
         }
 
         var position = this.body.GetPosition();
-        engine.context.translate(position.x * box2d.scale - engine.getOffsetLeft(), position.y * box2d.scale);
+        engine.context.translate(position.x * scale - engine.getOffsetLeft(), position.y * scale);
         engine.context.drawImage(this.sprite, sx, sy, this.sw, this.sh, this.dx, this.dy, this.dw, this.dh);
-        engine.context.translate(-position.x * box2d.scale + engine.getOffsetLeft(), -position.y * box2d.scale);
-    }
+        engine.context.translate(-position.x * scale + engine.getOffsetLeft(), -position.y * scale);
+    };
 
     // Move hero accordin to input forces
     DynamicGameObject.prototype.update = function () {
@@ -175,14 +177,15 @@ var hero = function () {
             }
         }
 
+        var rvel;
         if (this.moveLeft) {
-            var rvel = vel.x - increaseHeroSpeed(this.heroSpeedIncreaseStep);
+            rvel = vel.x - increaseHeroSpeed(this.heroSpeedIncreaseStep);
             this.heroSpeedIncreaseStep += 1;
             desiredVelX = rvel > -5 ? rvel : -5;
         }
 
         if (this.moveRight) {
-            var rvel = vel.x + increaseHeroSpeed(this.heroSpeedIncreaseStep);
+            rvel = vel.x + increaseHeroSpeed(this.heroSpeedIncreaseStep);
             this.heroSpeedIncreaseStep += 1;
             desiredVelX = rvel < 5 ? rvel : 5;
         }
@@ -204,8 +207,8 @@ var hero = function () {
         var velChangeY = desiredVelY - vel.y;
         var impulseX = this.body.GetMass() * velChangeX; //disregard time factor
         var impulseY = this.body.GetMass() * velChangeY; //disregard time factor
-        this.body.ApplyImpulse(new b2Vec2(impulseX, impulseY), posToApply);
-    }
+        this.body.ApplyImpulse(new B2Vec2(impulseX, impulseY), posToApply);
+    };
 
     function BadNinja(entity, age) {
         DynamicGameObject.call(this, entity);
@@ -235,13 +238,13 @@ var hero = function () {
         this.moveRight = true;
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
-    }
+    };
     inheritPrototype(VilianNakov, DynamicGameObject);
 
     VilianNakov.prototype.update = function () {
         this.parent.update.call(this);
         this.patrol();
-    }
+    };
 
     VilianNakov.prototype.patrol = function () {
         var currPositionX = this.getPosX();
@@ -254,7 +257,7 @@ var hero = function () {
             this.moveRight = true;
             this.moveLeft = false;
         }
-    }
+    };
 
     /* Niki */
     var VilianNiki = function (entity) {
@@ -263,13 +266,14 @@ var hero = function () {
         this.jump = true;
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
-    }
+    };
+
     inheritPrototype(VilianNiki, DynamicGameObject);
 
     VilianNiki.prototype.update = function () {
         this.parent.update.call(this);
         this.patrol();
-    }
+    };
 
     VilianNiki.prototype.patrol = function () {
         var currPositionX = this.getPosX();
@@ -282,7 +286,7 @@ var hero = function () {
             this.moveRight = true;
             this.moveLeft = false;
         }
-    }
+    };
 
     /* Doncho */
     var VilianDoncho = function (entity) {
@@ -290,13 +294,14 @@ var hero = function () {
         this.moveRight = true;
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
-    }
+    };
+
     inheritPrototype(VilianDoncho, DynamicGameObject);
 
     VilianDoncho.prototype.update = function () {
         this.parent.update.call(this);
         this.patrol();
-    }
+    };
 
     VilianDoncho.prototype.patrol = function () {
         var currPositionX = this.getPosX();
@@ -309,9 +314,54 @@ var hero = function () {
             this.moveRight = true;
             this.moveLeft = false;
         }
-    }
+    };
+
+    /* Goro */
+    var VilianGoro = function (entity) {
+        DynamicGameObject.call(this, entity);
+        this.moveRight = true;
+        this.maxRight = entity.maxRight;
+        this.minLeft = entity.minLeft;
+
+        this.spriteMoving = loader.loadImage("images/" + entity.name + "Moving.png");
+        this.spriteSleeping = loader.loadImage("images/" + entity.name + "Sleeping.png");
+        this.sprite = this.spriteSleeping;
+    };
+
+    inheritPrototype(VilianGoro, DynamicGameObject);
+
+    VilianGoro.prototype.update = function () {
+        this.parent.update.call(this);
+        this.patrol();
+    };
+
+    VilianGoro.prototype.wakeUp = function () {
+        this.sprite = this.spriteMoving;
+    };
+
+    VilianGoro.prototype.sleep = function () {
+        this.sprite = this.spriteSleep;
+    };
+
+    VilianGoro.prototype.patrol = function () {
+        var currPositionX = this.getPosX();
+        if (currPositionX > this.maxRight) {
+            this.moveRight = false;
+            this.moveLeft = true;
+        }
+
+        if (currPositionX < this.minLeft) {
+            this.moveRight = true;
+            this.moveLeft = false;
+        }
+    };
 
     return {
+        init: function(vPhysicsSimulation) {
+            physicsSimulation = vPhysicsSimulation;
+            scale = physicsSimulation.getScale();
+        },
+
         create: function (entity) {
             if (entity.name === "ninja") {
                 return new DynamicGameObject(entity);

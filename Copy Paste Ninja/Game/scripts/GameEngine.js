@@ -13,27 +13,35 @@ var engine = function () {
 
     var player;
     var ninjas = [];
+    var world;
+
+    var gameControler;
+    var physicsSimulation;
+    var entities;
+    var levelsData;
+    var loader;
+    var hero;
 
     function setLevelNumber(value) {
         levelNumber = 0;
     }
 
     function handlePanning() {
-        if (mode == "intro") {
+        if (mode === "intro") {
             if (panTo(700)) {
                 mode = "playing";
             }
         }
 
-        if (mode == "playing") {
+        if (mode === "playing") {
             panTo(player.getPosX());
         }
 
-        if (mode == "level-success" || mode == "level-failure") {
+        if (mode === "level-success" || mode === "level-failure") {
             if (panTo(0)) {
                 gameEnded = true;
                 // TODO: make it better, return state or something
-                gameControler.showEndingScreen();
+                gameControler.showEndingScreen(mode);
             }
         }
     }
@@ -65,34 +73,39 @@ var engine = function () {
 
     // Iterate through all the bodies and draw them on the game canvas
     function drawAllBodies() {
-        for (var body = box2d.world.GetBodyList() ; body; body = body.GetNext()) {
+        for (var body = physicsSimulation.getBodyList() ; body; body = body.GetNext()) {
             var entity = body.GetUserData();
             if (entity) {
                 if (entity.dead) {
-                    box2d.world.DestroyBody(body);
+                    physicsSimulation.destroyBody(body);
                     if (entity.type === "code") {
                         score += entity.score;
                         gameControler.updateScoreScreen(score);
                     }
                 } else {
-                    entities.draw(entity, body.GetPosition(), body.GetAngle())
+                    entities.draw(entity, body.GetPosition(), body.GetAngle());
                 }
             }
         }
     }
 
-    function startGame () {
-        $('.gamelayer').hide();
-        // Display the game canvas and score
-        $('#gamecanvas').show();
-        $('#scorescreen').show();
+    function startGame() {
+        gameControler.showGameScreen();
         mode = "intro";
         offsetLeft = 0;
         gameEnded = false;
-        window.requestAnimationFrame(engine.animate, engine.canvas);
+        window.requestAnimationFrame(engine.gameLoop, engine.canvas);
     }
 
     return {
+        init: function (vGameControler, vPhysicsSimulation, vEntities, vLevelsData, vLoader, vHero) {
+            gameControler = vGameControler;
+            physicsSimulation = vPhysicsSimulation;
+            entities = vEntities;
+            levelsData = vLevelsData;
+            loader = vLoader;
+            hero = vHero;
+        },
 
         getScore: function () {
             return score;
@@ -111,10 +124,9 @@ var engine = function () {
             score = 0;
 
             //Initialize Box2D world whenever a new level is loaded
-            box2d.init();
+            physicsSimulation.init();
             ninjas = [];
 
-            // TODO: make score
             gameControler.updateScoreScreen(score);
 
             var level = levelsData[levelNumber];
@@ -156,17 +168,17 @@ var engine = function () {
                 } else {
                     entities.create(entity);
                 }
-            };
+            }
 
             //Call game.start() once the assets have loaded
             if (loader.loaded) {
-                startGame()
+                startGame();
             } else {
                 loader.onload = startGame();
             }
         },
 
-        animate: function () {
+        gameLoop: function () {
             // Update player movement calcualtions
             for (var i = 0; i < ninjas.length; i++) {
                 ninjas[i].update();
@@ -180,7 +192,7 @@ var engine = function () {
             var timeStep;
             if (engine.lastUpdateTime) {
                 timeStep = (currentTime - engine.lastUpdateTime) / 1000;
-                box2d.step(timeStep);
+                physicsSimulation.step(timeStep);
             }
 
             engine.lastUpdateTime = currentTime;
@@ -193,15 +205,15 @@ var engine = function () {
             drawAllBodies();
 
             // Draw all ninjas
-            for (var i = 0; i < ninjas.length; i++) {
-                ninjas[i].draw();
+            for (var j = 0; j < ninjas.length; j++) {
+                ninjas[j].draw();
             }
 
             // Debug draw
-            box2d.world.DrawDebugData();
+            physicsSimulation.drawDebugData();
 
             if (!gameEnded) {
-                engine.animationFrame = window.requestAnimationFrame(engine.animate, engine.canvas);
+                engine.animationFrame = window.requestAnimationFrame(engine.gameLoop, engine.canvas);
             }
         },
 
