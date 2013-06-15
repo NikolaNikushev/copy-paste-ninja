@@ -32,7 +32,7 @@ var keyboard = {
         }
 
         if (validKey) {
-            event.originalEvent.preventDefault();
+            //event.originalEvent.preventDefault();
             engine.updateInput(keyboard.moveLeft, keyboard.moveRight, keyboard.jump, keyboard.usePowerUp);
         }
     },
@@ -59,7 +59,7 @@ var keyboard = {
         }
 
         if (validKey) {
-            event.originalEvent.preventDefault();
+            //event.originalEvent.preventDefault();
             engine.updateInput(keyboard.moveLeft, keyboard.moveRight, keyboard.jump, keyboard.usePowerUp);
         }
     },
