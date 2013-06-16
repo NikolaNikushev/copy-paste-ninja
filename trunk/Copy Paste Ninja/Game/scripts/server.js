@@ -47,7 +47,6 @@ function getScore(respons) {
 }
 
 function submit() {
-    console.log("submite pressed");
     var that = $(this);
     var url = that.attr('action');
     var type = that.attr('method');
