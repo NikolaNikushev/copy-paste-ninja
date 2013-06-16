@@ -3,7 +3,7 @@ var engine = function () {
     var mode = ""; // Game mode
     var maxSpeed = 7; // Maximum panning speed per frame in pixels
     var minOffset = 0; // Minimum and Maximum panning offset
-    var maxOffset = 300;
+    var maxOffset = 1200;
     var offsetLeft = 0; // Current panning offset
     var score = 0; // The game score
     var levelNumber = 0; // The level number
@@ -82,6 +82,9 @@ var engine = function () {
                         score += entity.score;
                         gameControler.updateScoreScreen(score);
                     }
+                    if (entity.type == "hero") {
+                        gameControler.showEndingScreen("level-failure");
+                    };
                 } else {
                     entities.draw(entity, body.GetPosition(), body.GetAngle());
                 }
