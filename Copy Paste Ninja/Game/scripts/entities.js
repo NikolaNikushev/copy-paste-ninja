@@ -50,6 +50,12 @@ var entities = function () {
             friction: 0.5,
             restitution: 0.1,
         },
+        "chair": {
+            fullHealth: 500,
+            density: 0.7,
+            friction: 0.4,
+            restitution: 0.4,
+        },
     };
 
     var engine;
@@ -112,6 +118,70 @@ var entities = function () {
         return body;
     }
 
+    function createSimplePolygonBody(entity, definition) {
+        var bodyDef = new B2BodyDef();
+        if (entity.isStatic) {
+            bodyDef.type = B2Body.b2_staticBody;
+        } else {
+            bodyDef.type = B2Body.b2_dynamicBody;
+        }
+
+        bodyDef.position.x = entity.x / scale;
+        bodyDef.position.y = entity.y / scale;
+        if (entity.angle) {
+            bodyDef.angle = Math.PI * entity.angle / 180;
+        }
+
+        var fixtureDef = new B2FixtureDef();
+        fixtureDef.density = definition.density;
+        fixtureDef.friction = definition.friction;
+        fixtureDef.restitution = definition.restitution;
+
+        fixtureDef.shape = new B2PolygonShape;
+        // Create an array of b2Vec2 points in clockwise direction
+        var x;
+        var y;
+        var points = [];
+        for (var i = 0; i < entity.points.length; i++) {
+            x = entity.points[i].x / scale;
+            y = entity.points[i].y / scale;
+            console.log(x + " " + y);
+            points.push(new B2Vec2(x, y));
+        }
+
+        // Use SetAsArray to define the shape using the points array
+        fixtureDef.shape.SetAsArray(points, points.length);
+        var body = physicsSimulation.addBody(bodyDef);
+        body.SetUserData(entity);
+        var fixture = body.CreateFixture(fixtureDef);
+        return body;
+    }
+
+    function test(){
+        var bodyDef = new B2BodyDef;
+        bodyDef.type = B2Body.b2_dynamicBody;
+        bodyDef.position.x = 230/scale;
+        bodyDef.position.y = 50/scale;
+        var fixtureDef = new B2FixtureDef;
+        fixtureDef.density = 1.0;
+        fixtureDef.friction = 0.5;
+        fixtureDef.restitution = 0.2
+        fixtureDef.shape = new B2PolygonShape;
+        // Create an array of b2Vec2 points in clockwise direction
+        var points = [
+            new B2Vec2(0,0),
+            new B2Vec2(40/scale,50/scale),
+            new B2Vec2(50/scale,100/scale),
+            new B2Vec2(-50 / scale, 100 / scale),
+            new B2Vec2(-40 / scale, 50 / scale),
+        ];
+        // Use SetAsArray to define the shape using the points array
+        fixtureDef.shape.SetAsArray(points, points.length);
+        //var body = world.CreateBody(bodyDef);
+        var body = physicsSimulation.addBody(bodyDef);
+        var fixture = body.CreateFixture(fixtureDef);
+    }
+
     return {
         init: function (vLoader, vPhysicsSimulation, vEngine) {
             engine = vEngine;
@@ -122,7 +192,7 @@ var entities = function () {
 
         // take the entity, create a Box2D body, and add it to the world
         create: function (entity) {
-            var body = undefined;
+            var body;
             var definition = definitions[entity.name];
             if (!definition) {
                 console.log("Undefined entity name", entity.name);
@@ -148,6 +218,11 @@ var entities = function () {
                     // No need for sprites. These won't be drawn at all
                     body = createRectangle(entity, definition);
                     break;
+                case "polygon": // complex shapes
+                    entity.sprite = loader.loadImage("images/entities/" + entity.name + ".png");
+                    body = createSimplePolygonBody(entity, definition);
+                    //test();
+                    break;
                 default:
                     throw new Error("Undefined entity type ", entity.type);
             }
@@ -163,6 +238,9 @@ var entities = function () {
                 case "code":
                     engine.context.drawImage(entity.sprite, 0, 0, entity.sprite.width, entity.sprite.height,
                     -entity.width / 2 - 1, -entity.height / 2 - 1, entity.width + 2, entity.height + 2);
+                    break;
+                case "polygon":
+                    // TODO: DRAW!!!
                     break;
                 case "ground":
                     // do nothing... We will draw objects like the ground & slingshot separately
