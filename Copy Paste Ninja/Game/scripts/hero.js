@@ -58,7 +58,7 @@ var hero = function () {
         this.body.SetFixedRotation(true);
         this.data = {
             type: "hero",
-            vilian: false
+            villain: false
         };
         this.body.SetUserData(this.data);
 
@@ -237,7 +237,7 @@ var hero = function () {
         this.moveRight = true;
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
-        this.data.vilian = true;
+        this.data.villain = true;
     };
     inheritPrototype(VilianNakov, DynamicGameObject);
 
@@ -266,7 +266,7 @@ var hero = function () {
         this.jump = true;
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
-        this.data.vilian = true;
+        this.data.villain = true;
     };
 
     inheritPrototype(VilianNiki, DynamicGameObject);
@@ -296,7 +296,7 @@ var hero = function () {
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
         this.chaseOffset = entity.chaseOffset;
-        this.data.vilian = true;
+        this.data.villain = true;
     };
 
     inheritPrototype(VilianDoncho, DynamicGameObject);
@@ -327,7 +327,7 @@ var hero = function () {
         this.moveRight = true;
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
-        this.data.vilian = true;
+        this.data.villain = true;
 
         this.spriteMoving = loader.loadImage("images/" + entity.name + "Moving.png");
         this.spriteSleeping = loader.loadImage("images/" + entity.name + "Sleeping.png");
