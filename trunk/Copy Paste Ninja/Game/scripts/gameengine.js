@@ -124,7 +124,7 @@ var engine = function () {
 
         getPlayer: function () {
             return player;
-        }
+        },
 
         newGame: function (levelNumber) {
             setLevelNumber(levelNumber);

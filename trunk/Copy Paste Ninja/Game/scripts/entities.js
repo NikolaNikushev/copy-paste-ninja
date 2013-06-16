@@ -87,6 +87,9 @@ var entities = function () {
 
         var body = physicsSimulation.addBody(bodyDef);
         body.SetUserData(entity);
+        if (entity.isSensor) {
+            fixtureDef.isSensor = true;
+        }
         var fixture = body.CreateFixture(fixtureDef);
         return body;
     }
