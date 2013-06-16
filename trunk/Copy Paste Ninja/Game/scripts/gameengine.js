@@ -82,7 +82,7 @@ var engine = function () {
                         score += entity.score;
                         gameControler.updateScoreScreen(score);
                     }
-                    if (entity.type == "hero") {
+                    if (entity.type === "hero") {
                         gameControler.showEndingScreen("level-failure");
                     };
                 } else {
