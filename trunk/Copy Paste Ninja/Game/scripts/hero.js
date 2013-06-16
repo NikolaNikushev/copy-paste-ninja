@@ -232,6 +232,50 @@ var hero = function () {
     BadNinja.prototype.patrool = function () {
     };
 
+    function setPatroling (hero) {
+        var currPositionX = hero.getPosX();
+        if (currPositionX > hero.maxRight) {
+            hero.moveRight = false;
+            hero.moveLeft = true;
+        }
+
+        if (currPositionX < hero.minLeft) {
+            hero.moveRight = true;
+            hero.moveLeft = false;
+        }
+    }
+
+    function setChasing(hero, isJumping){
+        if (isJumping == undefined) {
+            isJumping = false;
+        };
+
+        var currPositionX = hero.getPosX(),
+            player = engine.getPlayer();
+
+        // if (!player.facingRight && !player.facingRight) {
+            var leftObserve = (player.getPosX() > currPositionX - hero.chaseOffset) && (player.getPosX() < currPositionX);
+            var rightObserve = (player.getPosX() > currPositionX) && (player.getPosX() < hero.getPosX() + hero.width + hero.chaseOffset);
+            if (leftObserve) {
+                if (player.moveRight) {
+                    if (hero.getPosX() > hero.minLeft) {
+                        hero.moveLeft = true;
+                    };
+                    hero.moveRight = false;
+                };
+            };
+
+            if (rightObserve) {
+                if (player.moveRight && player.moveRight) {
+                    hero.moveLeft = false;
+                    if (hero.getPosX() < hero.maxRight) {
+                        hero.moveRight = true;
+                    }
+                };
+            };
+        // };
+    }
+
     /* Nakov */
     var VilianNakov = function (entity) {
         DynamicGameObject.call(this, entity);
@@ -239,6 +283,7 @@ var hero = function () {
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
         this.data.villain = true;
+        this.chaseOffset = 200; //entity.chaseOffset; // TODO move to levelsdata
     };
     inheritPrototype(VilianNakov, DynamicGameObject);
 
@@ -248,16 +293,8 @@ var hero = function () {
     };
 
     VilianNakov.prototype.patrol = function () {
-        var currPositionX = this.getPosX();
-        if (currPositionX > this.maxRight) {
-            this.moveRight = false;
-            this.moveLeft = true;
-        }
-
-        if (currPositionX < this.minLeft) {
-            this.moveRight = true;
-            this.moveLeft = false;
-        }
+        setPatroling(this);
+        setChasing(this);
     };
 
     /* Niki */
@@ -268,6 +305,7 @@ var hero = function () {
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
         this.data.villain = true;
+        this.chaseOffset = 150; //entity.chaseOffset; // TODO move to levelsdata
     };
 
     inheritPrototype(VilianNiki, DynamicGameObject);
@@ -278,16 +316,8 @@ var hero = function () {
     };
 
     VilianNiki.prototype.patrol = function () {
-        var currPositionX = this.getPosX();
-        if (currPositionX > this.maxRight) {
-            this.moveRight = false;
-            this.moveLeft = true;
-        }
-
-        if (currPositionX < this.minLeft) {
-            this.moveRight = true;
-            this.moveLeft = false;
-        }
+        setPatroling(this);
+        setChasing(this);
     };
 
     /* Doncho */
@@ -296,7 +326,8 @@ var hero = function () {
         this.moveRight = true;
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
-        this.chaseOffset = entity.chaseOffset;
+        this.chaseOffset = 100; //entity.chaseOffset; // TODO move to levelsdata
+        
         this.data.villain = true;
     };
 
@@ -308,20 +339,10 @@ var hero = function () {
     };
 
     VilianDoncho.prototype.patrol = function () {
-        var currPositionX = this.getPosX();
-
-        if (currPositionX > this.maxRight) {
-            this.moveRight = false;
-            this.moveLeft = true;
-        }
-
-        if (currPositionX < this.minLeft) {
-            this.moveRight = true;
-            this.moveLeft = false;
-        }
-// 
-        // console.log(engine.getPlayer().getPosX());
+        setPatroling(this);
+        setChasing(this);
     }
+
     /* Goro */
     var VilianGoro = function (entity) {
         DynamicGameObject.call(this, entity);
