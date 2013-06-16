@@ -210,18 +210,6 @@ var hero = function () {
         this.body.ApplyImpulse(new B2Vec2(impulseX, impulseY), posToApply);
     };
 
-    function Ninja(entity, age) {
-        DynamicGameObject.call(this, entity);
-        // add custom fields...
-        this.positionX = 0;
-    }
-    inheritPrototype(Ninja, DynamicGameObject);
-
-    Ninja.prototype.update = function(){
-        this.parent.update.call(this);
-        this.positionX = this.getPosX();
-    }
-
     function BadNinja(entity, age) {
         DynamicGameObject.call(this, entity);
         // add custom fields...
@@ -249,6 +237,7 @@ var hero = function () {
         this.moveRight = true;
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
+        this.data.vilian = true;
     };
     inheritPrototype(VilianNakov, DynamicGameObject);
 
@@ -277,6 +266,7 @@ var hero = function () {
         this.jump = true;
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
+        this.data.vilian = true;
     };
 
     inheritPrototype(VilianNiki, DynamicGameObject);
@@ -328,6 +318,8 @@ var hero = function () {
             this.moveRight = true;
             this.moveLeft = false;
         }
+// 
+        // console.log(engine.getPlayer().getPosX());
     }
     /* Goro */
     var VilianGoro = function (entity) {
@@ -335,6 +327,7 @@ var hero = function () {
         this.moveRight = true;
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
+        this.data.vilian = true;
 
         this.spriteMoving = loader.loadImage("images/" + entity.name + "Moving.png");
         this.spriteSleeping = loader.loadImage("images/" + entity.name + "Sleeping.png");
@@ -377,8 +370,8 @@ var hero = function () {
 
         create: function (entity) {
             if (entity.name === "ninja") {
-                // return new DynamicGameObject(entity);
-                return new Ninja(entity);
+                return new DynamicGameObject(entity);
+                // return new Ninja(entity);
             } else if (entity.name === "nakov") {
                 return new VilianNakov(entity);
             } else if (entity.name === "doncho") {

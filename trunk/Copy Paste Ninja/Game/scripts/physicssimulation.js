@@ -35,14 +35,14 @@ var physicsSimulation = function () {
                if (entity2.type === "code" && entity1.type === "hero") {
                        entity2.dead = true;
                }
-
+               
                // hero and vilian collision
                if ((entity1.type === "hero" && entity1.vilian) && entity2.type === "hero") {
-                       entity2.dead = true;
+                    entity2.dead = true;
                }
 
                if ((entity2.type === "hero" && entity2.vilian) && entity1.type === "hero") {
-                       entity1.dead = true;
+                    entity1.dead = true;
                }
             }
         };
