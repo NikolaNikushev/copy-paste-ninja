@@ -26,16 +26,25 @@ var physicsSimulation = function () {
             var entity1 = body1.GetUserData();
             var entity2 = body2.GetUserData();
 
+            if (entity1 && entity2) {
+               // hero & code collision
+               if (entity1.type === "code" && entity2.type === "hero") {
+                       entity1.dead = true;
+               }
 
-            //if (entity1 && entity2) {
-            //    if (entity1.type === "code" && entity2.type === "hero") {
-            //            entity1.dead = true;
-            //    }
+               if (entity2.type === "code" && entity1.type === "hero") {
+                       entity2.dead = true;
+               }
 
-            //    if (entity2.type === "code" && entity1.type === "hero") {
-            //            entity2.dead = true;
-            //    }
-            //}
+               // hero and vilian collision
+               if ((entity1.type === "hero" && entity1.vilian) && entity2.type === "hero") {
+                       entity2.dead = true;
+               }
+
+               if ((entity2.type === "hero" && entity2.vilian) && entity1.type === "hero") {
+                       entity1.dead = true;
+               }
+            }
         };
 
         listener.BeginContact = function (contact) {
