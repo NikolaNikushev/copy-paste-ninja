@@ -27,33 +27,21 @@ var physicsSimulation = function () {
             var entity2 = body2.GetUserData();
 
             if (entity1 && entity2) {
+                console.log(entity1.type + " " + entity1.name);
                 if (entity1.type === "hero" && entity1.name === "ninja") {
+                    console.log(entity1 + " abra");
                     if (entity2.type === "code") {
                         entity2.dead = true;
+                    } else if (entity2.villain) {
+                        entity1.dead = true;
                     }
-
                 } else if (entity2.type === "hero" && entity2.name === "ninja") {
                     if (entity1.type === "code") {
                         entity1.dead = true;
+                    } else if (entity1.villain) {
+                        entity2.dead = true;
                     }
                 }
-               // hero & code collision
-               if (entity1.type === "code" && entity2.type === "hero" && entity2.name === "ninja") {
-                       entity1.dead = true;
-               }
-
-               if (entity2.type === "code" && entity1.type === "hero" && entity1.type === "ninja") {
-                       entity2.dead = true;
-               }
-
-               // hero and vilian collision
-               if ((entity1.type === "hero" && entity1.vilian) && entity2.type === "hero") {
-                       entity2.dead = true;
-               }
-
-               if ((entity2.type === "hero" && entity2.vilian) && entity1.type === "hero") {
-                       entity1.dead = true;
-               }
             }
         };
 

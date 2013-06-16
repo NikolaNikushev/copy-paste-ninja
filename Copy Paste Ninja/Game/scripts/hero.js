@@ -57,8 +57,9 @@ var hero = function () {
         this.body = physicsSimulation.addBody(bodyDef);
         this.body.SetFixedRotation(true);
         this.data = {
-            type: "hero",
-            villain: false
+            type: entity.type,
+            villain: false,
+            name: entity.name,
         };
         this.body.SetUserData(this.data);
 
