@@ -18,7 +18,7 @@ var hero = function () {
     }
 
     function DynamicGameObject(entity) {
-        this.width = entity.width || 37;
+        this.width = entity.width || 40
         this.height = entity.height || 50;
 
         // Animation variables
@@ -58,7 +58,7 @@ var hero = function () {
         this.body.SetFixedRotation(true);
         this.data = {
             type: "hero",
-            name: entity.name
+            vilian: false
         };
         this.body.SetUserData(this.data);
 
@@ -210,6 +210,18 @@ var hero = function () {
         this.body.ApplyImpulse(new B2Vec2(impulseX, impulseY), posToApply);
     };
 
+    function Ninja(entity, age) {
+        DynamicGameObject.call(this, entity);
+        // add custom fields...
+        this.positionX = 0;
+    }
+    inheritPrototype(Ninja, DynamicGameObject);
+
+    Ninja.prototype.update = function(){
+        this.parent.update.call(this);
+        this.positionX = this.getPosX();
+    }
+
     function BadNinja(entity, age) {
         DynamicGameObject.call(this, entity);
         // add custom fields...
@@ -225,7 +237,6 @@ var hero = function () {
     BadNinja.prototype.update = function () {
         // mandatory call to parents update
         this.parent.update.call(this);
-        //console.log(this.getPosX());
 
     };
 
@@ -294,6 +305,8 @@ var hero = function () {
         this.moveRight = true;
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
+        this.chaseOffset = entity.chaseOffset;
+        this.data.vilian = true;
     };
 
     inheritPrototype(VilianDoncho, DynamicGameObject);
@@ -305,6 +318,7 @@ var hero = function () {
 
     VilianDoncho.prototype.patrol = function () {
         var currPositionX = this.getPosX();
+
         if (currPositionX > this.maxRight) {
             this.moveRight = false;
             this.moveLeft = true;
@@ -314,8 +328,7 @@ var hero = function () {
             this.moveRight = true;
             this.moveLeft = false;
         }
-    };
-
+    }
     /* Goro */
     var VilianGoro = function (entity) {
         DynamicGameObject.call(this, entity);
@@ -364,8 +377,8 @@ var hero = function () {
 
         create: function (entity) {
             if (entity.name === "ninja") {
-                return new DynamicGameObject(entity);
-                //return new Player(entity);
+                // return new DynamicGameObject(entity);
+                return new Ninja(entity);
             } else if (entity.name === "nakov") {
                 return new VilianNakov(entity);
             } else if (entity.name === "doncho") {
