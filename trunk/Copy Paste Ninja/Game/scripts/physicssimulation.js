@@ -27,18 +27,12 @@ var physicsSimulation = function () {
             var entity2 = body2.GetUserData();
 
             if (entity1 && entity2) {
-                console.log(entity1.type + " " + entity1.name);
                 if (entity1.type === "hero" && entity1.name === "ninja") {
-                    console.log(entity1 + " abra");
-                    if (entity2.type === "code") {
-                        entity2.dead = true;
-                    } else if (entity2.villain) {
+                    if (entity2.villain) {
                         entity1.dead = true;
                     }
                 } else if (entity2.type === "hero" && entity2.name === "ninja") {
-                    if (entity1.type === "code") {
-                        entity1.dead = true;
-                    } else if (entity1.villain) {
+                    if (entity1.villain) {
                         entity2.dead = true;
                     }
                 }
@@ -46,6 +40,23 @@ var physicsSimulation = function () {
         };
 
         listener.BeginContact = function (contact) {
+            var body1 = contact.GetFixtureA().GetBody();
+            var body2 = contact.GetFixtureB().GetBody();
+            var entity1 = body1.GetUserData();
+            var entity2 = body2.GetUserData();
+
+            if (entity1 && entity2) {
+                if (entity1.type === "hero" && entity1.name === "ninja") {
+                    if (entity2.type === "code") {
+                        entity2.dead = true;
+                    } 
+                } else if (entity2.type === "hero" && entity2.name === "ninja") {
+                    if (entity1.type === "code") {
+                        entity1.dead = true;
+                    }
+                }
+            }
+
             //check if fixture A was the foot sensor
             var fixtureUserData = contact.GetFixtureA().GetUserData();
             if (fixtureUserData) {
