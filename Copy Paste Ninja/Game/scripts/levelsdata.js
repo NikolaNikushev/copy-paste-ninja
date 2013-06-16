@@ -6,10 +6,10 @@ var levelsData = [
             background: 'hall-background',
             entities: [
                 // prevent hero moving out of the world
-                { type: "ground", name: "dirt", x: 1280 / 2, y: 600 - 15, width: 1280, height: 30, isStatic: true },
-                { type: "ground", name: "dirt", x: 1280 / 2, y: 15, width: 1280, height: 30, isStatic: true },
+                { type: "ground", name: "dirt", x: 4000 / 2, y: 600 - 15, width: 4000, height: 30, isStatic: true },
+                { type: "ground", name: "dirt", x: 4000 / 2, y: 15, width: 4000, height: 30, isStatic: true },
                 { type: "ground", name: "dirt", x: 15, y: 600 / 2, width: 30, height: 600, isStatic: true },
-                //{ type: "ground", name: "dirt", x: 1280 - 15, y: 600 / 2, width: 30, height: 600, isStatic: true },
+                { type: "ground", name: "dirt", x: 4000 - 15, y: 600 / 2, width: 30, height: 600, isStatic: true },
 
                 // platforms
                 { type: "block", name: "platform", x: 320, y: 420, width: 400, height: 30, isStatic: true },
