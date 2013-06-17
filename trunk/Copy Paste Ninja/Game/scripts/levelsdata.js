@@ -45,7 +45,7 @@ var levelsData = [
                 { type: "hero", name: "ninja", x: 50, y: 410 },
                 //{ type: "hero", name: "badninja", x: 550, y: 410 },
                 { type: "hero", name: "nakov", x: 200, y: 510, minLeft: 200, maxRight: 850 },
-                { type: "hero", name: "doncho", x: 700, y: 210, minLeft: 610, maxRight: 790 },
+                { type: "hero", name: "doncho", x: 600, y: 210, minLeft: 610, maxRight: 790 },
                 { type: "hero", name: "niki", x: 1200, y: 210, minLeft: 1100, maxRight: 1800 },
             ]
         },
@@ -65,21 +65,19 @@ var levelsData = [
                 { type: "block", name: "platform", x: 700, y: 500, width: 200, height: 30, isStatic: true },
 
                 // obstacles
-                { type: "block", name: "box", x: 320, y: 375, width: 50, height: 50 },
-                { type: "block", name: "box", x: 620, y: 375, width: 50, height: 50 },
-                { type: "block", name: "box", x: 520, y: 375, width: 50, height: 50 },
+                // { type: "block", name: "box", x: 320, y: 550, width: 70, height: 50 },
+                // { type: "block", name: "box", x: 520, y: 550, width: 70, height: 50 },
+                // { type: "block", name: "box", x: 620, y: 450, width: 70, height: 50 },
+                
 
                 // code
                 { type: "code", name: "code", x: 400, y: 290, width: 45, height: 30, isStatic: true, dead: false, score: 10 },
-                { type: "code", name: "code", x: 400, y: 550, width: 45, height: 30, isStatic: true, dead: false, score: 10 },
-                { type: "code", name: "code", x: 500, y: 390, width: 45, height: 30, isStatic: true, dead: false, score: 10 },
+                { type: "code", name: "code", x: 400, y: 400, width: 45, height: 30, isStatic: true, dead: false, score: 10 },
+                { type: "code", name: "code", x: 500, y: 500, width: 45, height: 30, isStatic: true, dead: false, score: 10 },
 
                 // hero
                 { type: "hero", name: "ninja", x: 150, y: 410 },
-                { type: "hero", name: "badninja", x: 550, y: 410 },
-
-
-
+                // { type: "hero", name: "goro", x: 200, y: 580, maxRight: 300, minLeft: 10 }
             ]
         }
 ];
