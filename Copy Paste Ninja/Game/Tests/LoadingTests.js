@@ -1,6 +1,7 @@
 describe("Loader", function () {
     describe("loading", function () {
         it("should have loaded a mp3 or ogg extension", function () {
+            gameControler.startGame(0);
             var soundFile = loader.soundFileExtn;
             expect(soundFile).toBeDefined();
             if (soundFile === ".ogg") {
@@ -11,13 +12,14 @@ describe("Loader", function () {
                 expect(soundFile).toBe(".mp3");
             }
         })
-        it("should have 15 items loaded", function () {
-            var items = loader.loadedCount;
-            expect(items).toBe(15);
-        });
+       
         it("should be complete", function () {
             var loaded = loader.loaded;
             expect(loaded).toBeTruthy();
+        });
+        it("should have 15 items loaded", function () {
+            var items = loader.loadedCount;
+            expect(items).toBe(15);
         });
        
     })
@@ -71,10 +73,66 @@ describe("Loader", function () {
             expect(imageLoaded).toBe(imageExpected);
         })
         it("all icons", function () {
-            var imageLoaded = loader.loadImage("images/badninja.png").outerHTML;
-            var imageExpected = "<img src=\"images/badninja.png\">";
+            var imageLoaded = loader.loadImage("images/icons/level.png").outerHTML;
+            var imageExpected = "<img src=\"images/icons/level.png\">";
             expect(imageLoaded).toBeDefined();
             expect(imageLoaded).toBe(imageExpected);
+
+            imageLoaded = loader.loadImage("images/icons/moregames.png").outerHTML;
+            imageExpected = "<img src=\"images/icons/moregames.png\">";
+            expect(imageLoaded).toBeDefined();
+            expect(imageLoaded).toBe(imageExpected);
+
+            imageLoaded = loader.loadImage("images/icons/next.png").outerHTML;
+            imageExpected = "<img src=\"images/icons/next.png\">";
+            expect(imageLoaded).toBeDefined();
+            expect(imageLoaded).toBe(imageExpected);
+
+            imageLoaded = loader.loadImage("images/icons/nosound.png").outerHTML;
+            imageExpected = "<img src=\"images/icons/nosound.png\">";
+            expect(imageLoaded).toBeDefined();
+            expect(imageLoaded).toBe(imageExpected);
+
+            imageLoaded = loader.loadImage("images/icons/pause.png").outerHTML;
+            imageExpected = "<img src=\"images/icons/pause.png\">";
+            expect(imageLoaded).toBeDefined();
+            expect(imageLoaded).toBe(imageExpected);
+
+            imageLoaded = loader.loadImage("images/icons/play.png").outerHTML;
+            imageExpected = "<img src=\"images/icons/play.png\">";
+            expect(imageLoaded).toBeDefined();
+            expect(imageLoaded).toBe(imageExpected);
+
+            imageLoaded = loader.loadImage("images/icons/playgame.png").outerHTML;
+            imageExpected = "<img src=\"images/icons/playgame.png\">";
+            expect(imageLoaded).toBeDefined();
+            expect(imageLoaded).toBe(imageExpected);
+
+            imageLoaded = loader.loadImage("images/icons/playmusic.png").outerHTML;
+            imageExpected = "<img src=\"images/icons/playmusic.png\">";
+            expect(imageLoaded).toBeDefined();
+            expect(imageLoaded).toBe(imageExpected);
+
+            imageLoaded = loader.loadImage("images/icons/prev.png").outerHTML;
+            imageExpected = "<img src=\"images/icons/prev.png\">";
+            expect(imageLoaded).toBeDefined();
+            expect(imageLoaded).toBe(imageExpected);
+
+            imageLoaded = loader.loadImage("images/icons/return.png").outerHTML;
+            imageExpected = "<img src=\"images/icons/return.png\">";
+            expect(imageLoaded).toBeDefined();
+            expect(imageLoaded).toBe(imageExpected);
+
+            imageLoaded = loader.loadImage("images/icons/settings.png").outerHTML;
+            imageExpected = "<img src=\"images/icons/settings.png\">";
+            expect(imageLoaded).toBeDefined();
+            expect(imageLoaded).toBe(imageExpected);
+
+            imageLoaded = loader.loadImage("images/icons/sound.png").outerHTML;
+            imageExpected = "<img src=\"images/icons/sound.png\">";
+            expect(imageLoaded).toBeDefined();
+            expect(imageLoaded).toBe(imageExpected);
+
         })
         it("all entities", function () {
             var imageLoaded = loader.loadImage("images/entities/box.png").outerHTML;

@@ -1,6 +1,7 @@
 describe("LevelsData",function myfunction() {
     describe("Entities", function () {
         it("throws error when invalid entitie name is created", function () {
+            gameControler.startGame(0);
             var entity = {
                 name: "ninja",
                 type: "heroMiro"

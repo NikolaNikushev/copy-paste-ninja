@@ -8,6 +8,7 @@ describe("Keyboard", function () {
             keyboard.usePowerUp = false;
         })
         it("init", function () {
+            gameControler.startGame(0);
             var action = keyboard.init;
             expect(action).toBeDefined();
         })
@@ -114,6 +115,8 @@ describe("Keyboard", function () {
                 keyboard.keyDownHandler({ which: 87 });
             })
             it("will get a valid command", function () {
+                console.log(keyboard);
+             
                 var action = keyboard.moveLeft || keyboard.moveRight || keyboard.jump || keyboard.usePowerUp;
                 expect(action).toBeTruthy();
             })
@@ -123,15 +126,9 @@ describe("Keyboard", function () {
             })
         })
         describe("release A", function () {
-            beforeEach(function () {
-                keyboard.moveLeft = false;
-                keyboard.moveRight = false;
-                keyboard.jump = false;
-                keyboard.usePowerUp = false;
-                keyboard.keyUpHandler({ which: 65 });
-            })
 
             it("will get a valid command", function () {
+                keyboard.keyUpHandler({ which: 65 });
                 var action = keyboard.moveLeft || keyboard.moveRight || keyboard.jump || keyboard.usePowerUp
                 expect(action).toBeFalsy();
             })
@@ -143,14 +140,9 @@ describe("Keyboard", function () {
         })
 
         describe("release SHIFT", function () {
-            beforeEach(function () {
-                keyboard.moveLeft = false;
-                keyboard.moveRight = false;
-                keyboard.jump = false;
-                keyboard.usePowerUp = false;
-                keyboard.keyUpHandler({ which: 16 });
-            })
+
             it("will get a valid command", function () {
+                keyboard.keyUpHandler({ which: 16 });
                 var action = keyboard.moveLeft || keyboard.moveRight || keyboard.jump || keyboard.usePowerUp;
                 expect(action).toBeFalsy();
             })
@@ -161,15 +153,10 @@ describe("Keyboard", function () {
         })
 
         describe("release D", function () {
-            beforeEach(function () {
-                keyboard.moveLeft = false;
-                keyboard.moveRight = false;
-                keyboard.jump = false;
-                keyboard.usePowerUp = false;
-                keyboard.keyUpHandler({ which: 68 });
-            })
+
 
             it("will get a valid command", function () {
+                keyboard.keyUpHandler({ which: 68 });
                 var action = keyboard.moveLeft || keyboard.moveRight || keyboard.jump || keyboard.usePowerUp;
                 expect(action).toBeFalsy();
             })
@@ -180,16 +167,11 @@ describe("Keyboard", function () {
         })
 
         describe("release W", function () {
-            beforeEach(function () {
-                keyboard.moveLeft = false;
-                keyboard.moveRight = false;
-                keyboard.jump = false;
-                keyboard.usePowerUp = false;
-                keyboard.keyUpHandler({ which: 87 });
-            })
 
             it("will get a valid command", function () {
+                keyboard.keyUpHandler({ which: 87 });
                 var action = keyboard.moveLeft || keyboard.moveRight || keyboard.jump || keyboard.usePowerUp;
+                
                 expect(action).toBeFalsy();
             })
             it("will stop jump", function () {
