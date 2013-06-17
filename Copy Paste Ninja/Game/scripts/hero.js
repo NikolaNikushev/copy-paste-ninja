@@ -255,7 +255,7 @@ var hero = function () {
             player = engine.getPlayer();
 
          if ((currPositionY < hero.getPosY() + 50) && (currPositionX == hero.getPosX())) {
-            console.log(currPositionY, hero.getPosY(), hero.name)
+            
             var leftObserve = (player.getPosX() > currPositionX - hero.chaseOffset) && (player.getPosX() < currPositionX);
             var rightObserve = (player.getPosX() > currPositionX) && (player.getPosX() < hero.getPosX() + hero.width + hero.chaseOffset);
             if (leftObserve) {
