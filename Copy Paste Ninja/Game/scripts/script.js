@@ -25,7 +25,7 @@ $(window).load(function () {
     // for debuging purpose
     // start level directly
     var level = 1;
-    gameControler.startGame(level - 1);
+    // gameControler.startGame(level - 1);
 
     // server side things and menus (not games one)
     var scoreTable = $("#getScore");
