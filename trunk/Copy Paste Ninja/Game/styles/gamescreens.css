@@ -31,6 +31,7 @@
 
     #levelselectscreen input {
         margin: 20px;
+        text-align: right;
         cursor: pointer;
         background: url(../images/icons/level.png) no-repeat;
         color: yellow;
