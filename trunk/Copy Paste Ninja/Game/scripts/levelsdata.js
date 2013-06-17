@@ -29,6 +29,8 @@ var levelsData = [
                 { type: "code", name: "code", x: 300, y: 390, width: 45, height: 30, isStatic: true, dead: false, score: 10, isSensor: true },
                 { type: "code", name: "code", x: 400, y: 550, width: 45, height: 30, isStatic: true, dead: false, score: 10, isSensor: true },
                 { type: "code", name: "code", x: 800, y: 550, width: 45, height: 30, isStatic: true, dead: false, score: 10, isSensor: true },
+                { type: "code", name: "code", x: 1150, y: 450, width: 45, height: 30, isStatic: true, dead: false, score: 10, isSensor: true },
+                { type: "code", name: "code", x: 1250, y: 400, width: 45, height: 30, isStatic: true, dead: false, score: 10, isSensor: true },
 
                 // complex shapes, defined by polygons
                 //{
@@ -55,10 +57,10 @@ var levelsData = [
             background: 'hall-background',
             entities: [
                 // prevent hero moving out of the world
-                { type: "ground", name: "dirt", x: 1280 / 2, y: 600 - 15, width: 1280, height: 30, isStatic: true },
-                { type: "ground", name: "dirt", x: 1280 / 2, y: 15, width: 1280, height: 30, isStatic: true },
+                { type: "ground", name: "dirt", x: 4000 / 2, y: 600 - 15, width: 4000, height: 30, isStatic: true },
+                { type: "ground", name: "dirt", x: 4000 / 2, y: 15, width: 4000, height: 30, isStatic: true },
                 { type: "ground", name: "dirt", x: 15, y: 600 / 2, width: 30, height: 600, isStatic: true },
-                { type: "ground", name: "dirt", x: 1280 - 15, y: 600 / 2, width: 30, height: 600, isStatic: true },
+                { type: "ground", name: "dirt", x: 4000 - 15, y: 600 / 2, width: 30, height: 600, isStatic: true },
 
                 // platforms
                 { type: "block", name: "platform", x: 100, y: 450, width: 200, height: 30, isStatic: true },

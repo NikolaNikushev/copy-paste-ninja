@@ -254,7 +254,8 @@ var hero = function () {
             currPositionY = hero.getPosY(),
             player = engine.getPlayer();
 
-         if (currPositionY < hero.getPosY() + 50) {
+         if ((currPositionY < hero.getPosY() + 50) && (currPositionX == hero.getPosX())) {
+            console.log(currPositionY, hero.getPosY(), hero.name)
             var leftObserve = (player.getPosX() > currPositionX - hero.chaseOffset) && (player.getPosX() < currPositionX);
             var rightObserve = (player.getPosX() > currPositionX) && (player.getPosX() < hero.getPosX() + hero.width + hero.chaseOffset);
             if (leftObserve) {
@@ -286,6 +287,7 @@ var hero = function () {
         this.minLeft = entity.minLeft;
         this.data.villain = true;
         this.chaseOffset = 200; //entity.chaseOffset; // TODO move to levelsdata
+        this.heroSpeedIncreaseStep = 0.5;
     };
     inheritPrototype(VilianNakov, DynamicGameObject);
 
