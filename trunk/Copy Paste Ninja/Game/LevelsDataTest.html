@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title>Jasmine Spec Runner</title>
+
+  <link rel="stylesheet" type="text/css" href="Tests/jasmine/jasmine.css">
+  <script type="text/javascript" src="Tests/jasmine/jasmine.js"></script>
+  <script type="text/javascript" src="Tests/jasmine/jasmine-html.js"></script>
+
+   <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <script src="scripts/jquery-2.0.2.js"></script>
+    <script src="scripts/Box2dWeb-2.1.a.3.js"></script>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/entities.js"></script>
+    <script src="scripts/gameengine.js"></script>
+    <script src="scripts/keyboard.js"></script>
+    <script src="scripts/levelsdata.js"></script>
+    <script src="scripts/loader.js"></script>
+    <script src="scripts/polyfills.js"></script>
+    <script src="scripts/gamecontroler.js"></script>
+    <script src="scripts/hero.js"></script>
+    <script src="scripts/physicssimulation.js"></script>
+    <link href="styles/gamescreens.css" rel="stylesheet" />
+    <link href="styles/menustyles.css" rel="stylesheet" />
+
+  <script type="text/javascript">
+      (function () {
+          var jasmineEnv = jasmine.getEnv();
+          jasmineEnv.updateInterval = 1000;
+
+          var htmlReporter = new jasmine.HtmlReporter();
+
+          jasmineEnv.addReporter(htmlReporter);
+
+          jasmineEnv.specFilter = function (spec) {
+              return htmlReporter.specFilter(spec);
+          };
+
+          var currentWindowOnload = window.onload;
+
+          window.onload = function () {
+              if (currentWindowOnload) {
+                  currentWindowOnload();
+              }
+              execJasmine();
+          };
+
+          function execJasmine() {
+              jasmineEnv.execute();
+          }
+
+      })();
+  </script>
+
+</head>
+
+<body>
+     <div id="gamecontainer">
+        <canvas id="gamecanvas" width="800" height="600" class="gamelayer"></canvas>
+
+        <div id="scorescreen" class="gamelayer">
+            <img id="togglemusic" src="images/icons/sound.png">
+            <img src="images/icons/prev.png" onclick="gameControler.restartLevel();">
+            <span id="score">Score: 0</span>
+        </div>
+
+        <div id="gamestartscreen" class="gamelayer">
+            <img src="images/icons/play.png" alt="Play Game" onclick="gameControler.start()">
+            <br />
+            <img src="images/icons/settings.png" alt="Settings">
+        </div>
+
+        <div id="levelselectscreen" class="gamelayer">
+        </div>
+
+        <div id="loadingscreen" class="gamelayer">
+            <div id="loadingmessage"></div>
+        </div>
+
+        <div id="endingscreen" class="gamelayer">
+            <div>
+                <p id="endingmessage">The Level Is Over Message</p>
+                <p id="playcurrentlevel" onclick="game.restartLevel();">
+                    <img
+                        src="images/icons/prev.png">
+                    Replay Current Level
+                </p>
+                <p id="playnextlevel" onclick="game.startNextLevel();">
+                    <img
+                        src="images/icons/next.png">
+                    Play Next Level
+                </p>
+                <p id="returntolevelscreen" onclick="game.showLevelScreen();">
+                    <img
+                        src="images/icons/return.png">
+                    Return to Level Screen
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <canvas id="debugcanvas" width="1300" height="600" style="border: 1px solid black;"></canvas>
+    <script type="text/javascript" src="Tests/LevelsDataTest.js"></script>
+</body>
+</html>

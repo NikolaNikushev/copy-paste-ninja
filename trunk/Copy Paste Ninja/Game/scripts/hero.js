@@ -406,7 +406,7 @@ var hero = function () {
                 return new BadNinja(entity, 28);
             } else {
                 // TODO: exception throw etc...
-                console.log("eroro");
+                throw "There is no such hero";
             }
         }
     };

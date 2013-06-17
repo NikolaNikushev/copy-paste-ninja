@@ -198,8 +198,7 @@ var entities = function () {
             var body;
             var definition = definitions[entity.name];
             if (!definition) {
-                console.log("Undefined entity name", entity.name);
-                return;
+                throw "Undefined entity name " + entity.name;
             }
 
             switch (entity.type) {
@@ -227,7 +226,7 @@ var entities = function () {
                     //test();
                     break;
                 default:
-                    throw new Error("Undefined entity type ", entity.type);
+                    throw "Undefined entity type " + entity.type;
             }
             return body;
         },
