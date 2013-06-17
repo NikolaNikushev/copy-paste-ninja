@@ -38,6 +38,7 @@ describe("gameengine", function () {
             })
         })
         describe("updateInput", function () {
+
             it("should have been called", function () {
                 spyOn(engine, 'updateInput').toHaveBeenCalled;
             })
@@ -50,6 +51,15 @@ describe("gameengine", function () {
                    
                     expect(action).toBeTruthy();
                 })
+                it("will stop on key release", function () {
+                    var player = engine.getPlayer();
+                    var action = player.moveLeft;
+                    expect(action).toBeTruthy();
+
+                    keyboard.keyUpHandler({ which: 65 });
+                    action = player.moveLeft;
+                    expect(action).toBeFalsy();
+                })
             })
 
             describe("using powerup", function () {
@@ -61,6 +71,15 @@ describe("gameengine", function () {
 
                     expect(action).toBeTruthy();
                 })
+                it("will stop on key release", function () {
+                    var player = engine.getPlayer();
+                    var action = player.usePowerUp;
+                    expect(action).toBeTruthy();
+
+                    keyboard.keyUpHandler({ which: 16 });
+                    action = player.usePowerUp;
+                    expect(action).toBeFalsy();
+                })
             })
 
             describe("moving right", function () {
@@ -68,9 +87,18 @@ describe("gameengine", function () {
                     var player = engine.getPlayer();
                     player.moveRight = false;
                     keyboard.keyDownHandler({ which: 68 });
-                    var action = keyboard.moveRight;
+                    var action = player.moveRight;
 
                     expect(action).toBeTruthy();
+                })
+                it("will stop on key release", function () {
+                    var player = engine.getPlayer();
+                    var action = player.moveRight;
+                    expect(action).toBeTruthy();
+
+                    keyboard.keyUpHandler({ which: 68 });
+                    action = player.moveRight;
+                    expect(action).toBeFalsy();
                 })
             })
 
@@ -79,9 +107,18 @@ describe("gameengine", function () {
                     var player = engine.getPlayer();
                     player.jump = false;
                     keyboard.keyDownHandler({ which: 87 });
-                    var action = keyboard.jump;
+                    var action = player.jump;
 
                     expect(action).toBeTruthy();
+                })
+                it("will stop on key release",function() {
+                    var player = engine.getPlayer();
+                    var action = player.jump;
+                    expect(action).toBeTruthy();
+
+                    keyboard.keyUpHandler({ which: 87 });
+                    action = player.jump;
+                    expect(action).toBeFalsy();
                 })
             })
         }) 
