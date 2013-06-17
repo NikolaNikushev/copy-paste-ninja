@@ -88,7 +88,7 @@ var gameControler = function () {
             $('#scorescreen').show();
         },
 
-        showEndingScreen: function (mode) {
+        showEndingScreen: function (mode, score) {
             if (mode === "level-success") {
                 if (engine.getLevelNumber() < levelsData.length - 1) {
                     $('#endingmessage').html('Level Complete. Well Done!!!');
@@ -102,6 +102,8 @@ var gameControler = function () {
                 $("#playnextlevel").hide();
             }
             $('#endingscreen').show();
+            var formUplodScore = $("#getScore");
+            scoreTable.click();
         }
     };
 }();

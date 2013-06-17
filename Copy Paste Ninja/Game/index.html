@@ -58,7 +58,7 @@
                         src="images/icons/next.png">
                     Play Next Level
                 </p>
-                <p id="returntolevelscreen" onclick="gameControler.showLevelScreen();">
+                <p id="returntolevelscreen" onclick="gameControler.start();">
                     <img
                         src="images/icons/return.png">
                     Return to Level Screen
@@ -68,8 +68,9 @@
 
     </div>
 
+    <br />
     <canvas id="debugcanvas" width="1300" height="600" style="border: 1px solid black;"></canvas>
-     <div id="wrapper">
+     <div id="wrapper"j
         <div id="left">
             <fieldset>
                 <legend>High Scores:
@@ -145,7 +146,7 @@
         <form action="http://www.copy-paste-ninja.moshensky.com/php/uploadScore.php" method="post" class="ajax">
             <input class="input-bar" type="text" name="username" placeholder="username" />
             <input class="input-bar" type="text" name="score" placeholder="score" />
-            <input class="button-style" type="submit" value="upload" />
+            <input class="button-style" type="submit" value="upload" id="#uplodScores"/>
         </form>
 
 
