@@ -84,7 +84,7 @@ var engine = function () {
                     }
                     // debug: commented
                     if (entity.type == "hero") {
-                        gameControler.showEndingScreen("level-failure");
+                        gameControler.showEndingScreen("level-failure", score);
                     };
                 } else {
                     entities.draw(entity, body.GetPosition(), body.GetAngle());
