@@ -12,14 +12,9 @@ describe("Loader", function () {
                 expect(soundFile).toBe(".mp3");
             }
         })
-       
-        it("should be complete", function () {
-            var loaded = loader.loaded;
-            expect(loaded).toBeTruthy();
-        });
-        it("should have 15 items loaded", function () {
+        it("should have 19 items loaded", function () {
             var items = loader.loadedCount;
-            expect(items).toBe(15);
+            expect(items).toBe(19);
         });
        
     })
