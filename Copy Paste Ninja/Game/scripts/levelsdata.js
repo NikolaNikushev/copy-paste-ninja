@@ -30,7 +30,9 @@ var levelsData = [
                 { type: "code", name: "code", x: 400, y: 550, width: 45, height: 30, isStatic: true, dead: false, score: 10, isSensor: true },
                 { type: "code", name: "code", x: 800, y: 550, width: 45, height: 30, isStatic: true, dead: false, score: 10, isSensor: true },
                 { type: "code", name: "code", x: 1150, y: 450, width: 45, height: 30, isStatic: true, dead: false, score: 10, isSensor: true },
-                { type: "code", name: "code", x: 1250, y: 400, width: 45, height: 30, isStatic: true, dead: false, score: 10, isSensor: true },
+                { type: "code", name: "code", x: 1230, y: 350, width: 45, height: 30, isStatic: true, dead: false, score: 10, isSensor: true },
+                { type: "code", name: "code", x: 1330, y: 350, width: 45, height: 30, isStatic: true, dead: false, score: 10, isSensor: true },
+                { type: "code", name: "code", x: 1450, y: 450, width: 45, height: 30, isStatic: true, dead: false, score: 10, isSensor: true },
 
                 // complex shapes, defined by polygons
                 //{
