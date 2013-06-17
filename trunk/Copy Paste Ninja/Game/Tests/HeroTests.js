@@ -1,6 +1,8 @@
 describe("Hero", function () {
     describe("hero.create", function () {
+
         it("creates a hero", function () {
+            gameControler.startGame(0);
             var entity = {
                 name: "ninja",
                 type: "hero"
@@ -77,13 +79,6 @@ describe("Hero", function () {
                 }
                 expect(thrown).toBeTruthy();
                 expect(thrownMessage).toBe("There is no such hero");
-            });
-        });
-        describe("hero.getPosX", function () {
-            it("gets the current hero(player) position starting is 50", function () {
-                var player = engine.getPlayer();
-                var playerX = player.getPosX();
-                expect(playerX).toBe(50);
             });
         });
     });

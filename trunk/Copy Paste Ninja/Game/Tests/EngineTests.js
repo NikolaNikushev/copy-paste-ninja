@@ -1,5 +1,7 @@
 describe("gameengine", function () {
-    it("tests for creating an engine", function() {
+   
+    it("tests for creating an engine", function () {
+        gameControler.startGame(0);
         var newEngine = engine;
         expect(newEngine).toBeDefined();
     })
@@ -12,12 +14,12 @@ describe("gameengine", function () {
            
         })
        
-        describe("getOffsetLeft", function () {
-            it("should be 0",function () {
-                var offset = engine.getOffsetLeft()
-                expect(offset).toBe(0);
-            })
-        })
+        //describe("getOffsetLeft", function () {
+        //    it("should be 0",function () {
+        //        var offset = engine.getOffsetLeft()
+        //        expect(offset).toBe(0);
+        //    })
+        //})
        
         describe("getLevelNumber", function () {
             it("should be 0",function () {

@@ -1,6 +1,7 @@
 describe("Score", function () {
 
     it("should be zero", function () {
+        gameControler.startGame(0);
         var textSplit = document.getElementById('score').innerHTML.split(":");
 
         var result = parseInt(textSplit[1]);
