@@ -23,6 +23,7 @@ var hero = function () {
 
         // Animation variables
         this.sprite = loader.loadImage("images/" + entity.name + ".png");
+        
         this.facingRight = true;
         this.speed = 0;
         this.animationFrame = 0;
@@ -111,7 +112,6 @@ var hero = function () {
     DynamicGameObject.prototype.draw = function () {
         // The X coordinate of the top left corner of the sub-rectangle of the source image to draw into the destination context.
         var sx = this.width * this.animationFrame;
-
 
         if (this.speed !== 0) {
             // change hero animating direction based on his movement direction
@@ -251,9 +251,10 @@ var hero = function () {
         };
 
         var currPositionX = hero.getPosX(),
+            currPositionY = hero.getPosY(),
             player = engine.getPlayer();
 
-        // if (!player.facingRight && !player.facingRight) {
+         if (currPositionY < hero.getPosY() + 50) {
             var leftObserve = (player.getPosX() > currPositionX - hero.chaseOffset) && (player.getPosX() < currPositionX);
             var rightObserve = (player.getPosX() > currPositionX) && (player.getPosX() < hero.getPosX() + hero.width + hero.chaseOffset);
             if (leftObserve) {
@@ -267,13 +268,14 @@ var hero = function () {
 
             if (rightObserve) {
                 if (player.moveRight && player.moveRight) {
-                    hero.moveLeft = false;
                     if (hero.getPosX() < hero.maxRight) {
                         hero.moveRight = true;
                     }
+                    hero.moveLeft = false;
+
                 };
             };
-        // };
+         };
     }
 
     /* Nakov */
@@ -346,42 +348,71 @@ var hero = function () {
     /* Goro */
     var VilianGoro = function (entity) {
         DynamicGameObject.call(this, entity);
-        this.moveRight = true;
+        
         this.maxRight = entity.maxRight;
         this.minLeft = entity.minLeft;
         this.data.villain = true;
+        this.state = "sleep";
+        this.chaseOffset = 100;
 
         this.spriteMoving = loader.loadImage("images/" + entity.name + "Moving.png");
-        this.spriteSleeping = loader.loadImage("images/" + entity.name + "Sleeping.png");
-        this.sprite = this.spriteSleeping;
+        this.spriteAwake = loader.loadImage("images/" + entity.name + "Awake.png");
+        this.spriteSleeping = loader.loadImage("images/" + entity.name + ".png");
+
+        this.sleep();
     };
 
     inheritPrototype(VilianGoro, DynamicGameObject);
 
     VilianGoro.prototype.update = function () {
         this.parent.update.call(this);
-        this.patrol();
+
+        var player = engine.getPlayer();
+
+        // If player moves behind sleeping goro, wake him up:
+        var awakePosition = 
+            (player.getPosX() > (this.getPosX() + 20)) &&
+            (player.getPosX() < (this.getPosX() + this.maxRight));
+
+        if (awakePosition) {
+            this.wakeUp();
+            this.patrol();
+        };
+
+        var movingPosition = 
+            (player.getPosX() > (this.getPosX() + 0)) &&
+            (player.getPosX() < (this.getPosX() + this.chaseOffset));
+
+        if (movingPosition && this.state == "awake") {
+            this.moving();
+            this.patrol();
+        };
     };
 
     VilianGoro.prototype.wakeUp = function () {
-        this.sprite = this.spriteMoving;
+        this.state = "awake";
+        this.moveRight = false;
+        this.sprite = this.spriteAwake;
     };
 
     VilianGoro.prototype.sleep = function () {
-        this.sprite = this.spriteSleep;
+        this.moveRight = false;
+        this.state = "sleep";
+        this.width = 48;
+        this.height = 43;
+        this.sprite = this.spriteSleeping;
+    };
+
+    VilianGoro.prototype.moving = function () {
+        this.sprite = this.spriteMoving;
+        this.moveRight = true;
+        this.state = "moving";
+        this.patrol();        
     };
 
     VilianGoro.prototype.patrol = function () {
-        var currPositionX = this.getPosX();
-        if (currPositionX > this.maxRight) {
-            this.moveRight = false;
-            this.moveLeft = true;
-        }
-
-        if (currPositionX < this.minLeft) {
-            this.moveRight = true;
-            this.moveLeft = false;
-        }
+        setPatroling(this);
+        setChasing(this);
     };
 
     return {
